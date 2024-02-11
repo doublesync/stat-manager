@@ -9,9 +9,9 @@
 - 🏆 Award/accolade tracking.
 - 👨‍🔬 Other optional simulation league logic.
 
-<h3 align="left">Connect with me:</h3>
-[Email here](chriscarlton368@gmail.com)
+<h3 align="left">Contributors</h3>
 <p align="left">
+  [Doublesync](https://github.com/doublesync)
 </p>
 
 <h3 align="left">Languages and Tools:</h3>
