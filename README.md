@@ -11,7 +11,7 @@
 
 <h3 align="left">Contributors</h3>
 <p align="left">
-  - https://github.com/doublesync
+  - Doublesync
 </p>
 
 <h3 align="left">Languages and Tools:</h3>
