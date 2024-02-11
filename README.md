@@ -1,4 +1,4 @@
-<h1 align="center">Welcome, 👋 stat-tracker</h1>
+<h1 align="center">Welcome, this is 👋 stat-tracker</h1>
 <h3 align="center">An open-source statistic tracker for sports leagues.</h3>
 
 - 💹 Statistic tracking and display.
@@ -7,7 +7,8 @@
 
 - 👨‍🔬 Optional simulation league logic.
 
-<h3 align="left">Connect with me:  [Email](chriscarlton368@gmail.com)</h3>
+<h3 align="left">Connect with me:</h3>
+[Email here](chriscarlton368@gmail.com)
 <p align="left">
 </p>
 
