@@ -1,11 +1,13 @@
 <h1 align="center">Welcome, this is 👋 stat-tracker</h1>
 <h3 align="center">An open-source statistic tracker for sports leagues.</h3>
+<p>If you manage a sports league (whether real-life or simulation) this is the project for you!</p>
 
 - 💹 Statistic tracking and display.
-
 - 👶 Player and team creation.
-
-- 👨‍🔬 Optional simulation league logic.
+- 🥳 Event creation and sign-ups.
+- 💵 Virtual currency & coupons.
+- 🏆 Award/accolade tracking.
+- 👨‍🔬 Other optional simulation league logic.
 
 <h3 align="left">Connect with me:</h3>
 [Email here](chriscarlton368@gmail.com)
