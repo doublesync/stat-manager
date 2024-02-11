@@ -19,6 +19,7 @@ from django.urls import path, include
 
 from . import views
 
+app_name: str = 'stat-manager'
 urlpatterns: list = [
     path('', views.home, name='home'),
     path('basketball/', include('basketball.urls')),
