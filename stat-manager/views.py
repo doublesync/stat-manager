@@ -1,7 +1,7 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.http import HttpResponse
 
 # Create your views here.
 def home(request) -> HttpResponse:
-    text: str = 'Basketball Stat Manager / Home';
-    return HttpResponse(text);
+    return redirect('basketball:home')
