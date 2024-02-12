@@ -33,8 +33,8 @@ def loginDiscordRedirect(request: any) -> redirect:
         discordUser: any = list(discordUser).pop() # Not sure of type
         login(request, discordUser)
         messages.success(request, 'You have successfully logged in!')
-    except Exception:
-        messages.error(request, 'There was an error logging in.')
+    except Exception as e:
+        messages.error(request, f'There was an error logging in: {e}')
     return redirect('core:home')
 
 def logoutDiscord(request: any) -> redirect:
