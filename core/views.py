@@ -31,7 +31,7 @@ def loginDiscordRedirect(request: any) -> redirect:
         user: dict = info[0]
         discordUser: any = authenticate(request, user=user) # Not sure of type
         discordUser: any = list(discordUser).pop() # Not sure of type
-        login(request, discordUser)
+        login(request, discordUser, 'core.authorize.DiscordBackend')
         messages.success(request, 'You have successfully logged in!')
     except Exception as e:
         messages.error(request, f'There was an error logging in: {e}')
