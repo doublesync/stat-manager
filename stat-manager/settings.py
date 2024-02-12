@@ -30,7 +30,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 AUTHENTICATION_BACKENDS = [
-    "core.authorize.DiscordBackend",
+    'core.authorize.DiscordBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 # Application definition
