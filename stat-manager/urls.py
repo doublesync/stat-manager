@@ -21,7 +21,7 @@ from . import views
 
 app_name: str = 'stat-manager'
 urlpatterns: list = [
-    path('', views.home, name='home'),
+    path('', include('core.urls')),
     path('basketball/', include('basketball.urls')),
     path('admin/', admin.site.urls),
 ]

@@ -4,4 +4,4 @@ from django.http import HttpResponse
 
 # Create your views here.
 def home(request) -> HttpResponse:
-    return redirect('basketball:home')
+    return redirect('core:home')
