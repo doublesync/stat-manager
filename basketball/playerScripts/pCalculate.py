@@ -9,8 +9,8 @@ def calculateBMI(weight: int, height: int) -> float:
 def formatHeight(height: int) -> str:
     return f"{height // 12}'{height % 12}"
 
-def heightRoll(position: str) -> list[int, str, float]:
-    heightOdds: dict[int, float] = pSettings.heightOdds[position]
+def heightRoll(archetype: str, position: str) -> list[int, str, float]:
+    heightOdds: dict[int, float] = pSettings.heightOdds[archetype][position]
     chosenHeight: int = choices(list(heightOdds.keys()), list(heightOdds.values()))[0]
     return [
         chosenHeight, 
