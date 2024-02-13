@@ -2,7 +2,7 @@ from django.contrib.auth import models
 
 class DiscordAuthorizationManager(models.UserManager):
     def createDiscordUser(self, user) -> dict:
-        new_user: object = self.create(
+        newUser: object = self.create(
             id=user["id"],
             discord_tag=user["username"],
             avatar=user["avatar"],
@@ -11,4 +11,4 @@ class DiscordAuthorizationManager(models.UserManager):
             locale=user["locale"],
             mfa_enabled=user["mfa_enabled"],
         )
-        return new_user
+        return newUser
