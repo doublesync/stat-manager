@@ -1,5 +1,4 @@
 from django.db import models
-import basketball.leagueSettings.pSettings as pSettings
 import basketball.leagueSettings.pDefault as pDefault
 import basketball.playerScripts.pCalculate as pCalculate
 
