@@ -1,5 +1,6 @@
 import random
 import basketball.leagueSettings.pSettings as pSettings
+import basketball.leagueSettings.pHeight as pHeight
 
 from random import choices
 
@@ -13,7 +14,7 @@ def formatHeight(height: int) -> str:
 
 
 def heightRoll(archetype: str, position: str) -> list[int, str, float]:
-    heightOdds: dict[int, float] = pSettings.heightOdds[archetype][position]
+    heightOdds: dict[int, float] = pHeight.heightOdds[archetype][position]
     roll: int = random.randint(1, 100)
     for _range, height in heightOdds.items():
         if roll in _range:
