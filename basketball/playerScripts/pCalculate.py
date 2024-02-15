@@ -1,5 +1,4 @@
 import random
-import basketball.leagueSettings.pSettings as pSettings
 import basketball.leagueSettings.pHeight as pHeight
 
 from random import choices
