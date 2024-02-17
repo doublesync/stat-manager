@@ -26,7 +26,7 @@ defaultPlayerLimits: dict[str, dict[str, int]] = {
 playerLimits: dict[str, dict[str, int]] = {
     "Skilled": defaultPlayerLimits,
     "Athletic": defaultPlayerLimits,
-    "Giants": {
+    "Giant": {
         "PG": {
             "heightLimits": [75, 79],
             "weightLimits": [160, 200],
