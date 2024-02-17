@@ -1,6 +1,10 @@
+import random
+
+
 # A function used to return an accurate range by incrementing the end of the range
 def realRange(start: int, end: int) -> range:
-    return range(start, (end+1))
+    return range(start, (end + 1))
+
 
 # Default height and wingspan odds used for skilled and athletic players
 defaultHeightOdds: dict[str, dict[range, int]] = {
@@ -87,3 +91,11 @@ heightOdds: dict[str, dict[str, dict[int, float]]] = {
         },
     },
 }
+
+
+# Roll for the players height
+def heightRoll(archetype: str, position: str) -> int:
+    roll = random.randint(1, 100)
+    for key, value in heightOdds[archetype][position].items():
+        if roll in key:
+            return value
