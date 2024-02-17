@@ -50,71 +50,57 @@ weightModels: dict[str, dict[str, int]] = {
 weightBoosts: dict[str, dict[str, int]] = {
     "Lightest": {
         "Default": {
-            "Strength": -15,
             "Acceleration": 10,
         },
         "Athletic": {
-            "Strength": -8,
             "Acceleration": 15,
         },
     },
     "Lighter": {
         "Default": {
-            "Strength": -10,
             "Acceleration": 8,
         },
         "Athletic": {
-            "Strength": -3,
             "Acceleration": 13,
         },
     },
     "Light": {
         "Default": {
-            "Strength": -5,
             "Acceleration": 5,
         },
         "Athletic": {
-            "Strength": 2,
             "Acceleration": 10,
         },
     },
     "Default": {
         "Default": {
-            "Strength": 0,
             "Acceleration": 0,
         },
         "Athletic": {
-            "Strength": 7,
             "Acceleration": 5,
         },
     },
     "Heavy": {
         "Default": {
-            "Strength": 5,
             "Acceleration": -10,
         },
         "Athletic": {
-            "Strength": 12,
             "Acceleration": -5,
         },
     },
     "Heavier": {
         "Default": {
-            "Strength": 10,
             "Acceleration": -15,
         },
         "Athletic": {
-            "Strength": 17,
             "Acceleration": -10,
         },
     },
     "Heaviest": {
         "Default": {
-            "Strength": 15,
             "Acceleration": -20,
         },
         "Athletic": {
-            "Strength": 22,
             "Acceleration": -15,
         },
     },
