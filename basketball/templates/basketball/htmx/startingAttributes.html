@@ -1,6 +1,13 @@
 <h5 class="card-title mb-2">Starting Attributes</h5><hr>
 <div class="list-group">
     {% for attribute, value in startingAttributes.items %}
-            <h6 class="card-subtitle mb-2 text-muted">{{ attribute }}: {{ value }}</h6>
+    <!-- Make red if lower number, gray if medium number, and green if higher number -->
+        {% if value < 50 %}
+            <h6 class="card-subtitle mb-2 text-muted">{{ attribute }}: <span style="color: maroon;">{{ value }}</span></h6>
+        {% elif value > 50 and value < 75 %}
+            <h6 class="card-subtitle mb-2 text-muted">{{ attribute }}: <span style="color: orange;">{{ value }}</span></h6>
+        {% else %}
+            <h6 class="card-subtitle mb-2 text-muted">{{ attribute }}: <span style="color: green;">{{ value }}</span></h6>
+        {% endif %}
     {% endfor %}
 </div>
