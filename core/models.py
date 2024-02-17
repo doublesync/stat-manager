@@ -1,6 +1,7 @@
 from django.db import models
 from .managers import DiscordAuthorizationManager
 
+
 # Create your models here.
 class DiscordUser(models.Model):
     objects: any = DiscordAuthorizationManager()
@@ -13,6 +14,7 @@ class DiscordUser(models.Model):
     mfa_enabled: bool = models.BooleanField()
     last_login: str = models.DateTimeField(null=True)
     last_reward: str = models.DateTimeField(null=True)
+    my_players: any = models.ManyToManyField("basketball.BasketballPlayer", null=True)
 
     def is_authenticated(self, request) -> bool:
         return True

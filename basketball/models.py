@@ -7,13 +7,18 @@ from copy import deepcopy
 
 # Create your models here
 class BasketballPlayer(models.Model):
-    first_name: str = models.CharField(max_length=32)
-    last_name: str = models.CharField(max_length=32)
+    firstName: str = models.CharField(max_length=32)
+    lastName: str = models.CharField(max_length=32)
     height: int = models.IntegerField()
+    formattedHeight: str = models.CharField(max_length=10, default="0'0")
     weight: int = models.IntegerField()
+    weightModel: str = models.CharField(
+        max_length=10,
+        default="Default",
+        choices=[(weight, weight) for weight in pDefault.weightChoices],
+    )
     wingspan: int = models.IntegerField()
     bmi: float = models.FloatField()
-    age: str = models.CharField(max_length=32)
     archetype: str = models.CharField(
         max_length=10,
         choices=[(arch, arch) for arch in pDefault.archetypeChoices],
@@ -22,30 +27,31 @@ class BasketballPlayer(models.Model):
         max_length=2,
         choices=[(pos, pos) for pos in pDefault.positionChoices],
     )
-    secondary_position: str = models.CharField(
+    secondaryPosition: str = models.CharField(
         max_length=2,
         choices=[(pos, pos) for pos in pDefault.positionChoices],
-    )
-    current_team: any = models.OneToOneField(
-        "BasketballTeam", on_delete=models.SET_NULL, null=True
     )
     # Copy the defualt attributes
     attributes: any = models.JSONField(default=pDefault.defaultAttributes, blank=True)
     badges: any = models.JSONField(default=pDefault.defaultBadges, blank=True)
     tendencies: any = models.JSONField(default=pDefault.defaultTendencies, blank=True)
 
-    # Other objects
-    current_team: any = models.ForeignKey(
-        "BasketballTeam", on_delete=models.SET_NULL, null=True
+    # Foreign keys
+    discordUser: any = models.ForeignKey(
+        "core.DiscordUser", on_delete=models.SET_NULL, blank=True, null=True
+    )
+    currentTeam: any = models.ForeignKey(
+        "BasketballTeam", on_delete=models.SET_NULL, blank=True, null=True
     )
 
     # What will be displayed in the admin panel
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.firstName} {self.lastName}"
 
     # Overriding the save method to calculate some things
     def save(self, *args, **kwargs):
         self.bmi = pCalculate.calculateBMI(self.weight, self.height)
+        self.formattedHeight = pCalculate.formatHeight(self.height)
         super().save(*args, **kwargs)
 
 
