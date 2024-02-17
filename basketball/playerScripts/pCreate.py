@@ -8,8 +8,21 @@ import basketball.leagueSettings.pAnomaly as pAnomaly  # anomalyRoll()
 import basketball.models as models  # BasketballPlayer
 
 
+# Validate the player creation data
+def validatePlayerData(data: dict) -> bool:
+    # Check for how many players the user has
+    playerCount = models.BasketballPlayer.objects.filter(
+        discordUser=data["discord_user"]
+    ).count()
+    if playerCount >= 1:
+        return False
+
+
 # Player creation function
-def createPlayer(data: dict) -> any:
+def createPlayer(discordUser: any, data: dict) -> any:
+    # Validate the player creation data
+    if not validatePlayerData(data):
+        return None
     # Get creation data
     firstName = data["first_name"]
     lastName = data["last_name"]
@@ -29,6 +42,7 @@ def createPlayer(data: dict) -> any:
         wingspan=pWingspan.wingspanRoll(),
         weight=weight,
         weightModel=weightModel,
+        discordUser=discordUser,
     )
     # Set the starting physicals and attributes
     player = pPhysical.setStartingPhysicals(player)

@@ -1,0 +1,134 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-sm-12 col-md-8 col-lg-6 bg-white shadow-lg rounded-3 card">
+            <div class="p-4">
+                <div class="text-center">
+                    <h4 class="text-dark mb-4">BUILD PLAYER</h4>
+                </div>
+                <form>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input name="firstName" id="firstName" class="form-control" type="text" placeholder="First Name" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input name="lastName" id="lastName" class="form-control" type="text" placeholder="Last Name" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="archetype" class="form-label">Archetype</label>
+                                <select name="archetype" id="archetype" class="form-select" hx-post="{% url 'basketball:htmxStartingAttributes' %}" hx-trigger="change" hx-target="#attributeDisplay" hx-swap="innerHTML">
+                                    <option value="Skilled">Skilled</option>
+                                    <option value="Athletic">Athletic</option>
+                                    <option value="Giant">Giant</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="weightModel" class="form-label">Weight Model</label>
+                                <select name="weightModel" id="weightModel" class="form-select" hx-post="{% url 'basketball:htmxStartingAttributes' %}" hx-trigger="change" hx-target="#attributeDisplay" hx-swap="innerHTML">
+                                    <option value="Lightest">Lightest</option>
+                                    <option value="Lighter">Lighter</option>
+                                    <option value="Light">Light</option>
+                                    <option value="Default" selected>Default</option>
+                                    <option value="Heavy">Heavy</option>
+                                    <option value="Heavier">Heavier</option>
+                                    <option value="Heaviest">Heaviest</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="jerseyNumber" class="form-label">Jersey Number</label>
+                                <input name="jerseeyNumber" id="jerseyNumber" class="form-control" type="number" min="0" max="99" placeholder="0" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="handedness" class="form-label">Handedness</label>
+                                <select id="handedness" class="form-select">
+                                    <option value="Left">Left</option>
+                                    <option value="Right">Right</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="position" class="form-label">Position</label>
+                                <select name="position" id="position" class="form-select" hx-post="{% url 'basketball:htmxStartingAttributes' %}" hx-trigger="change" hx-target="#attributeDisplay" hx-swap="innerHTML">
+                                    <option value="PG">Point Guard</option>
+                                    <option value="SG">Shooting Guard</option>
+                                    <option value="SF">Small Forward</option>
+                                    <option value="PF">Power Forward</option>
+                                    <option value="C">Center</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="secondaryPosition" class="form-label">Secondary Position</label>
+                                <select name="secondaryPosition" id="secondaryPosition" class="form-select" >
+                                    <option value="PG">Point Guard</option>
+                                    <option value="SG">Shooting Guard</option>
+                                    <option value="SF">Small Forward</option>
+                                    <option value="PF">Power Forward</option>
+                                    <option value="C">Center</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div><hr>
+                    <div class="mb-3">
+                        <h4>WHAT-IF</h4>
+                        <p>What would my starting attributes look like at this height?</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="height" class="form-label">Height</label>
+                                <select name="height" id="height" class="form-select" hx-post="{% url 'basketball:htmxStartingAttributes' %}" hx-trigger="change" hx-target="#attributeDisplay" hx-swap="innerHTML">
+                                    <option value="72">6'0</option>
+                                    <option value="73">6'1</option>
+                                    <option value="74">6'2</option>
+                                    <option value="75">6'3</option>
+                                    <option value="76">6'4</option>
+                                    <option value="77">6'5</option>
+                                    <option value="78">6'6</option>
+                                    <option value="79">6'7</option>
+                                    <option value="80">6'8</option>
+                                    <option value="81">6'9</option>
+                                    <option value="82">6'10</option>
+                                    <option value="83">6'11</option>
+                                    <option value="84">7'0</option>
+                                    <option value="85">7'1</option>
+                                    <option value="86">7'2</option>
+                                    <option value="87">7'3</option>
+                                    <option value="88">7'4</option>
+                                    <option value="89">7'5</option>
+                                    <option value="90">7'6</option>
+                                    <option value="91">7'7</option>
+                                </select>
+                            </div>
+                        </div>
+                        </div>
+                    <button id="submitBtn" class="btn btn-success d-block btn-user w-100" type="submit">Begin Career</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="bg-white shadow-lg rounded-3 card">
+                <div class="card-body">
+                    <div id="attributeDisplay">
+                        {% include 'basketball/htmx/startingAttributes.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

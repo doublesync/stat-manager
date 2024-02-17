@@ -1,0 +1,6 @@
+<h5 class="card-title mb-2">Starting Attributes</h5><hr>
+<div class="list-group">
+    {% for attribute, value in startingAttributes.items %}
+            <h6 class="card-subtitle mb-2 text-muted">{{ attribute }}: {{ value }}</h6>
+    {% endfor %}
+</div>

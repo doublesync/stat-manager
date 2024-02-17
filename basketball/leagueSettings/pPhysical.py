@@ -222,5 +222,8 @@ def setStartingPhysicals(player: any) -> any:
     weightModelBoosts: dict = pWeight.weightBoosts[player.weightModel][modelToUse]
     # Apply the weight model boosts
     for attribute, boost in weightModelBoosts.items():
-        player.attributes[attribute] += boost
+        if player.attributes[attribute] + boost > 99:
+            player.attributes[attribute] = 99
+        else:
+            player.attributes[attribute] += boost
     return player

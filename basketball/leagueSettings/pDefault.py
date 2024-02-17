@@ -35,7 +35,7 @@ def defaultAttributes() -> dict[str, int]:
         "Hands": 0,
         "Defensive Rebound": 0,
         "Interior Defense": 0,
-        "Perimeter Defense": 75,
+        "Perimeter Defense": 0,
         "Block": 0,
         "Steal": 0,
         "Lateral Quickness": 0,
