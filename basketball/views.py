@@ -7,6 +7,7 @@ from basketball.forms import BasketballPlayerForm
 import basketball.leagueSettings.pDefault as pDefault
 import basketball.leagueSettings.pAttributes as pAttributes
 import basketball.leagueSettings.pPhysical as pPhysical
+import basketball.leagueSettings.pLimits as pLimits
 
 
 # Create your views here.
@@ -27,6 +28,11 @@ def htmxStartingAttributes(request) -> HttpResponse:
         archetype: str = request.POST.get("archetype")
         position: str = request.POST.get("position")
         weightModel: str = request.POST.get("weightModel")
+        # Validate that height fits within the bounds
+        if height > pLimits.playerLimits[archetype][position]["heightLimits"][1]:
+            return HttpResponse(f"❌ Height is too tall for {position}.")
+        elif height < pLimits.playerLimits[archetype][position]["heightLimits"][0]:   
+            return HttpResponse(f"❌ Height is too short for {position}.")
         # Mock player class (so it looks like an object to our functions)
         class MockPlayer:
             def __init__(self):
