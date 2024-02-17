@@ -14,11 +14,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="firstName" class="form-label">First Name</label>
-                                <input name="firstName" id="firstName" class="form-control" type="text" placeholder="First Name" required />
+                                <input name="firstName" id="firstName" class="form-control" type="text" placeholder="First Name" required autocomplete="off"/>
                             </div>
                             <div class="col-md-6">
                                 <label for="lastName" class="form-label">Last Name</label>
-                                <input name="lastName" id="lastName" class="form-control" type="text" placeholder="Last Name" required />
+                                <input name="lastName" id="lastName" class="form-control" type="text" placeholder="Last Name" required autocomplete="off"/>
                             </div>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="archetype" class="form-label">Archetype</label>
-                                <select name="archetype" id="archetype" class="form-select" hx-post="{% url 'basketball:htmxStartingAttributes' %}" hx-trigger="change" hx-target="#attributeDisplay" hx-swap="innerHTML">
+                                <select name="archetype" id="archetype" class="form-select" hx-post="{% url 'basketball:htmxStartingAttributes' %}" hx-trigger="change" hx-target="#attributeDisplay" hx-swap="innerHTML" required>
                                     <option value="Skilled">Skilled</option>
                                     <option value="Athletic">Athletic</option>
                                     <option value="Giant">Giant</option>
@@ -34,7 +34,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="weightModel" class="form-label">Weight Model</label>
-                                <select name="weightModel" id="weightModel" class="form-select" hx-post="{% url 'basketball:htmxStartingAttributes' %}" hx-trigger="change" hx-target="#attributeDisplay" hx-swap="innerHTML">
+                                <select name="weightModel" id="weightModel" class="form-select" hx-post="{% url 'basketball:htmxStartingAttributes' %}" hx-trigger="change" hx-target="#attributeDisplay" hx-swap="innerHTML" required>
                                     <option value="Lightest">Lightest</option>
                                     <option value="Lighter">Lighter</option>
                                     <option value="Light">Light</option>
@@ -50,7 +50,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="jerseyNumber" class="form-label">Jersey Number</label>
-                                <input name="jerseeyNumber" id="jerseyNumber" class="form-control" type="number" min="0" max="99" placeholder="0" required />
+                                <input name="jerseeyNumber" id="jerseyNumber" class="form-control" type="number" min="0" max="99" placeholder="0" required autocomplete="off"/>
                             </div>
                             <div class="col-md-6">
                                 <label for="handedness" class="form-label">Handedness</label>
