@@ -6,201 +6,201 @@ startingPhysicals: dict[int, dict[str, int]] = {
     72: {
         "Default": {
             "Vertical": 84,
-            "Speed": 92,
+            "Speed": 94,
         },
         "Athletic": {
             "Vertical": 94,
-            "Speed": 97,
+            "Speed": 99,
         },
     },
     73: {
         "Default": {
             "Vertical": 83,
-            "Speed": 89,
+            "Speed": 93,
         },
         "Athletic": {
             "Vertical": 93,
-            "Speed": 94,
+            "Speed": 98,
         },
     },
     74: {
         "Default": {
             "Vertical": 82,
-            "Speed": 86,
+            "Speed": 91,
         },
         "Athletic": {
             "Vertical": 92,
-            "Speed": 91,
+            "Speed": 96,
         },
     },
     75: {
         "Default": {
             "Vertical": 81,
-            "Speed": 83,
+            "Speed": 89,
         },
         "Athletic": {
             "Vertical": 91,
-            "Speed": 88,
+            "Speed": 94,
         },
     },
     76: {
         "Default": {
             "Vertical": 80,
-            "Speed": 80,
+            "Speed": 87,
         },
         "Athletic": {
             "Vertical": 90,
-            "Speed": 85,
+            "Speed": 92,
         },
     },
     77: {
         "Default": {
             "Vertical": 79,
-            "Speed": 77,
+            "Speed": 85,
         },
         "Athletic": {
             "Vertical": 89,
-            "Speed": 82,
+            "Speed": 90,
         },
     },
     78: {
         "Default": {
             "Vertical": 78,
-            "Speed": 74,
+            "Speed": 83,
         },
         "Athletic": {
             "Vertical": 88,
-            "Speed": 79,
+            "Speed": 88,
         },
     },
     79: {
         "Default": {
             "Vertical": 77,
-            "Speed": 71,
+            "Speed": 81,
         },
         "Athletic": {
             "Vertical": 87,
-            "Speed": 76,
+            "Speed": 86,
         },
     },
     80: {
         "Default": {
             "Vertical": 76,
-            "Speed": 68,
+            "Speed": 79,
         },
         "Athletic": {
             "Vertical": 86,
-            "Speed": 73,
+            "Speed": 84,
         },
     },
     81: {
         "Default": {
             "Vertical": 75,
-            "Speed": 65,
+            "Speed": 75,
         },
         "Athletic": {
             "Vertical": 85,
-            "Speed": 70,
+            "Speed": 80,
         },
     },
     82: {
         "Default": {
             "Vertical": 74,
-            "Speed": 62,
+            "Speed": 70,
         },
         "Athletic": {
             "Vertical": 84,
-            "Speed": 67,
+            "Speed": 75,
         },
     },
     83: {
         "Default": {
             "Vertical": 73,
-            "Speed": 59,
+            "Speed": 68,
         },
         "Athletic": {
             "Vertical": 83,
-            "Speed": 64,
+            "Speed": 73,
         },
     },
     84: {
         "Default": {
             "Vertical": 72,
-            "Speed": 54,
+            "Speed": 65,
         },
         "Athletic": {
             "Vertical": 82,
-            "Speed": 59,
+            "Speed": 70,
         },
     },
     85: {
         "Default": {
             "Vertical": 70,
-            "Speed": 51,
+            "Speed": 60,
         },
         "Athletic": {
             "Vertical": 80,
-            "Speed": 56,
+            "Speed": 65,
         },
     },
     86: {
         "Default": {
             "Vertical": 68,
-            "Speed": 48,
+            "Speed": 57,
         },
         "Athletic": {
             "Vertical": 78,
-            "Speed": 53,
+            "Speed": 62,
         },
     },
     87: {
         "Default": {
             "Vertical": 76,
-            "Speed": 45,
+            "Speed": 54,
         },
         "Athletic": {
             "Vertical": 86,
-            "Speed": 50,
+            "Speed": 59,
         },
     },
     88: {
         "Default": {
             "Vertical": 74,
-            "Speed": 42,
+            "Speed": 50,
         },
         "Athletic": {
             "Vertical": 84,
-            "Speed": 47,
+            "Speed": 55,
         },
     },
     89: {
         "Default": {
             "Vertical": 72,
-            "Speed": 39,
+            "Speed": 45,
         },
         "Athletic": {
             "Vertical": 82,
-            "Speed": 44,
+            "Speed": 50,
         },
     },
     90: {
         "Default": {
             "Vertical": 68,
-            "Speed": 36,
+            "Speed": 42,
         },
         "Athletic": {
             "Vertical": 78,
-            "Speed": 41,
+            "Speed": 47,
         },
     },
     91: {
         "Default": {
             "Vertical": 66,
-            "Speed": 33,
+            "Speed": 40,
         },
         "Athletic": {
             "Vertical": 76,
-            "Speed": 38,
+            "Speed": 45,
         },
     },
 }
