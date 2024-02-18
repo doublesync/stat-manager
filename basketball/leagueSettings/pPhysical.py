@@ -217,6 +217,7 @@ def setStartingPhysicals(player: any) -> any:
     player.attributes["Speed with Ball"] = startingPhysicals[player.height][modelToUse]["Speed"]
     player.attributes["Acceleration"] = startingPhysicals[player.height][modelToUse]["Speed"]
     player.attributes["Vertical"] = startingPhysicals[player.height][modelToUse]["Vertical"]
+    player.attributes["Lateral Quickness"] = (player.attributes["Speed"] + player.attributes["Perimeter Defense"]) // 2 
     # fmt: on
     # Check if the player qualifies for athletic boosts
     weightModelBoosts: dict = pWeight.weightBoosts[player.weightModel][modelToUse]

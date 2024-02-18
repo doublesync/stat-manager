@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-<div class="container mt-4">
+<div id="mainContainer" class="container mt-4">
     <div class="row">
         <div class="col-sm-12 col-md-8 col-lg-6 bg-white shadow-lg rounded-3 card">
             <div class="p-4">
@@ -116,7 +116,7 @@
                             </div>
                         </div>
                         </div>
-                    <button id="submitBtn" class="btn btn-success d-block btn-user w-100" type="submit">Begin Career</button>
+                    <button id="submitBtn" class="btn btn-success d-block btn-user w-100" hx-post="{% url 'basketball:htmxCreate' %}" hx-trigger="click" hx-target="#mainContainer" hx-swap="innerHTML">Begin Career</button>
                 </form>
             </div>
         </div>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Player Creation Successful</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="jumbotron">
+        <h1 class="display-4">Player Created Successfully!</h1>
+        <p class="lead">Congratulations! Your new player has been successfully created.</p>
+        <p>Explore the exciting world of basketball and lead your player to greatness.</p>
+        <hr class="my-4">
+        <a class="btn btn-primary btn-lg mb-4" href="{% url 'basketball:home' %}" role="button">Continue</a>
+    </div>
+    <!-- Now show player details -->
+    <div class="row">
+        <div class="col-md-6 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Player Details</h3>
+                    <hr>
+                    <p class="card-text mb-0">First Name: {{ player.firstName }}</p>
+                    <p class="card-text mb-0">Last Name: {{ player.lastName }}</p>
+                    <p class="card-text mb-0">Position: {{ player.position }}/{{ player.secondaryPosition }}</p>
+                    <div>
+                        <p class="card-text mb-0 fw-bold text-dark">Height: {{ player.formattedHeight }}</p>
+                        <p class="card-text mb-0 fw-bold text-dark">Weight: {{ player.weight }} lbs</p>
+                        <p class="card-text mb-0 fw-bold text-dark">Wingspan: {{ player.wingspan }}/100</p>
+                        <p class="card-text mb-0 fw-bold text-danger">Anomaly: {{ player.anomaly }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Player Attributes</h3>
+                    <hr>
+                    <div class="list-group">
+                        {% for attribute, value in player.attributes.items %}
+                            {% if value < 50 %}
+                                <p class="mb-0">{{ attribute }}: <span style="color: maroon;">{{ value }}</span></p>
+                            {% elif value > 50 and value < 75 %}
+                                <p class="mb-0">{{ attribute }}: <span style="color: orange;">{{ value }}</span></p>
+                            {% else %}
+                                <p class="mb-0">{{ attribute }}: <span style="color: green;">{{ value }}</span></p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

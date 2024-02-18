@@ -1,0 +1,256 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mt-5 mb-4">Player Details</h1>
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title">{{ player.firstName }} {{ player.lastName }}</h2>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Cash:</strong> ${{ player.cash }}</li>
+                <li class="list-group-item"><strong>Anomaly:</strong> {{ player.anomaly }}</li>
+                <li class="list-group-item"><strong>Height:</strong> {{ player.formattedHeight }}</li>
+                <li class="list-group-item"><strong>Weight:</strong> {{ player.weight }} lbs</li>
+                <li class="list-group-item"><strong>Wingspan:</strong> {{ player.wingspan }}/100</li>
+                <li class="list-group-item"><strong>BMI:</strong> {{ player.bmi }}</li>
+                <li class="list-group-item"><strong>Archetype:</strong> {{ player.archetype }}</li>
+                <li class="list-group-item"><strong>Position:</strong> {{ player.position }}/{{ player.secondaryPosition }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ATTRIBUTE CATEGORIES -->
+    
+    <h1 class="mb-4">Attributes</h1>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title mb-0">Shooting</h2>
+                    <p class="mt-0 mb-1">ATTRIBUTES</p>
+                    <div class="list-group">
+                        {% for attribute, value in player.attributes.items %}
+                            {% if attribute in attributeCategories.Shooting %}
+                                {% if value <= 50 %}
+                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: maroon;">{{ value }}</span></h5>
+                                {% elif value > 50 and value < 75 %}
+                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: orange;">{{ value }}</span></h5>
+                                {% else %}
+                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: green;">{{ value }}</span></h5>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title mb-0">Finishing</h2>
+                    <p class="mt-0 mb-1">ATTRIBUTES</p>
+                    <div class="list-group">
+                        {% for attribute, value in player.attributes.items %}
+                            {% if attribute in attributeCategories.Finishing %}
+                                {% if value <= 50 %}
+                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: maroon;">{{ value }}</span></h5>
+                                {% elif value > 50 and value < 75 %}
+                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: orange;">{{ value }}</span></h5>
+                                {% else %}
+                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: green;">{{ value }}</span></h5>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title mb-0">Playmaking</h2>
+                    <p class="mt-0 mb-1">ATTRIBUTES</p>
+                    <div class="list-group">
+                        {% for attribute, value in player.attributes.items %}
+                            {% if attribute in attributeCategories.Playmaking %}
+                                {% if value <= 50 %}
+                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: maroon;">{{ value }}</span></h5>
+                                {% elif value > 50 and value < 75 %}
+                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: orange;">{{ value }}</span></h5>
+                                {% else %}
+                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: green;">{{ value }}</span></h5>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title mb-0">Defensive</h2>
+                    <p class="mt-0 mb-1">ATTRIBUTES</p>
+                    <div class="list-group">
+                        {% for attribute, value in player.attributes.items %}
+                            {% if attribute in attributeCategories.Defensive %}
+                                <h5 class="card-subtitle mb-2 text-muted {% if value < 50 %}text-maroon{% elif value >= 50 and value < 75 %}text-orange{% else %}text-green{% endif %}"></h5>
+                                {% if value <= 50 %}
+                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: maroon;">{{ value }}</span></h5>
+                                {% elif value > 50 and value < 75 %}
+                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: orange;">{{ value }}</span></h5>
+                                {% else %}
+                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: green;">{{ value }}</span></h5>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title mb-0">Physical</h2>
+                    <p class="mt-0 mb-1">ATTRIBUTES</p>
+                    <div class="list-group">
+                        {% for attribute, value in player.attributes.items %}
+                            {% if attribute in attributeCategories.Physical %}
+                                <h5 class="card-subtitle mb-2 text-muted {% if value < 50 %}text-maroon{% elif value >= 50 and value < 75 %}text-orange{% else %}text-green{% endif %}"></h5>
+                                {% if value <= 50 %}
+                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: maroon;">{{ value }}</span></h5>
+                                {% elif value > 50 and value < 75 %}
+                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: orange;">{{ value }}</span></h5>
+                                {% else %}
+                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: green;">{{ value }}</span></h5>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BADGE CATEGORIES -->
+    <h1 class="mb-4">Badges</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 d-flex flex-fill">
+                    <div class="card-body">
+                        <h2 class="card-title mb-0">Shooting</h2>
+                        <p class="mt-0">BADGES</p>
+                        <div class="list-group">
+                            {% for badge, value in player.badges.items %}
+                                {% if badge in badgeCategories.Shooting %}
+                                    <h5 class="card-subtitle mb-2 text-muted {% if value == 1 %}text-purple{% elif value == 2 %}text-yellow{% elif value == 3 %}text-gray{% elif value == 4 %}text-brown{% else %}text-danger{% endif %}">
+                                        {% if value == 1 %}
+                                        🟫
+                                        {% elif value == 2 %}
+                                        🌫️
+                                        {% elif value == 3 %}
+                                        🟨
+                                        {% elif value == 4 %}
+                                        🟪
+                                        {% else %}  
+                                        🟥
+                                        {% endif %}
+                                        {{ badge }}
+                                    </h5>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 d-flex flex-fill">
+                    <div class="card-body">
+                        <h2 class="card-title mb-0">Finishing</h2>
+                        <p class="mt-0">BADGES</p>
+                        <div class="list-group">
+                            {% for badge, value in player.badges.items %}
+                                {% if badge in badgeCategories.Finishing %}
+                                    <h5 class="card-subtitle mb-2 text-muted {% if value == 1 %}text-purple{% elif value == 2 %}text-yellow{% elif value == 3 %}text-gray{% elif value == 4 %}text-brown{% else %}text-danger{% endif %}">
+                                        {% if value == 1 %}
+                                        🟫
+                                        {% elif value == 2 %}
+                                        🌫️
+                                        {% elif value == 3 %}
+                                        🟨
+                                        {% elif value == 4 %}
+                                        🟪
+                                        {% else %}  
+                                        🟥
+                                        {% endif %}
+                                        {{ badge }}
+                                    </h5>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 d-flex flex-fill">
+                    <div class="card-body">
+                        <h2 class="card-title mb-0">Playmaking</h2>
+                        <p class="mt-0">BADGES</p>
+                        <div class="list-group">
+                            {% for badge, value in player.badges.items %}
+                                {% if badge in badgeCategories.Playmaking %}
+                                    <h5 class="card-subtitle mb-2 text-muted {% if value == 1 %}text-purple{% elif value == 2 %}text-yellow{% elif value == 3 %}text-gray{% elif value == 4 %}text-brown{% else %}text-danger{% endif %}">
+                                        {% if value == 1 %}
+                                        🟫
+                                        {% elif value == 2 %}
+                                        🌫️
+                                        {% elif value == 3 %}
+                                        🟨
+                                        {% elif value == 4 %}
+                                        🟪
+                                        {% else %}  
+                                        🟥
+                                        {% endif %}
+                                        {{ badge }}
+                                    </h5>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mb-4">
+                <div class="card h-100 d-flex flex-fill">
+                    <div class="card-body">
+                        <h2 class="card-title mb-0">Defensive</h2>
+                        <p class="mt-0">BADGES</p>
+                        <div class="list-group">
+                            {% for badge, value in player.badges.items %}
+                                {% if badge in badgeCategories.Defensive %}
+                                    <h5 class="card-subtitle mb-2 text-muted {% if value == 1 %}text-purple{% elif value == 2 %}text-yellow{% elif value == 3 %}text-gray{% elif value == 4 %}text-brown{% else %}text-danger{% endif %}">
+                                        {% if value == 1 %}
+                                        🟫
+                                        {% elif value == 2 %}
+                                        🌫️
+                                        {% elif value == 3 %}
+                                        🟨
+                                        {% elif value == 4 %}
+                                        🟪
+                                        {% else %}  
+                                        🟥
+                                        {% endif %}
+                                        {{ badge }}
+                                    </h5>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

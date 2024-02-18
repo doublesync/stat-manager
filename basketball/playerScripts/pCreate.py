@@ -9,30 +9,30 @@ import basketball.models as models  # BasketballPlayer
 
 
 # Validate the player creation data
-def validatePlayerData(data: dict) -> bool:
+def validatePlayerData(discordUser: any, data: dict) -> bool:
     # Check for how many players the user has
-    playerCount = models.BasketballPlayer.objects.filter(
-        discordUser=data["discord_user"]
-    ).count()
-    if playerCount >= 1:
-        return False
+    players: any = models.BasketballPlayer.objects.filter(discordUser=discordUser)
+    playerCount: int = len(players)
+    if playerCount >= 5:
+        return [False, "You have too many players."]
 
 
 # Player creation function
 def createPlayer(discordUser: any, data: dict) -> any:
     # Validate the player creation data
-    if not validatePlayerData(data):
-        return None
+    validated = validatePlayerData(discordUser, data)
+    if validated and not validated[0]:
+        return validated
     # Get creation data
-    firstName = data["first_name"]
-    lastName = data["last_name"]
-    position = data["position"]
-    secondaryPosition = data["secondary_position"]
-    archetype = data["archetype"]
-    weightModel = data["weight_model"]
-    weight = pWeight.getWeightFromModel(position, weightModel)
+    firstName: str = data["firstName"]
+    lastName: str = data["lastName"]
+    position: str = data["position"]
+    secondaryPosition: str = data["secondaryPosition"]
+    archetype: str = data["archetype"]
+    weightModel: str = data["weightModel"]
+    weight: int = pWeight.getWeightFromModel(position, weightModel)
     # Create the player object
-    player = models.BasketballPlayer(
+    player: any = models.BasketballPlayer(
         firstName=firstName,
         lastName=lastName,
         position=position,
@@ -45,9 +45,9 @@ def createPlayer(discordUser: any, data: dict) -> any:
         discordUser=discordUser,
     )
     # Set the starting physicals and attributes
-    player = pPhysical.setStartingPhysicals(player)
+    player: any = pPhysical.setStartingPhysicals(player)
     # Run player rolls
-    player = pAnomaly.anomalyRoll(player)
+    player: any = pAnomaly.anomalyRoll(player)
     # Save the player
     player.save()
-    return player
+    return [player, "Player created successfully."]

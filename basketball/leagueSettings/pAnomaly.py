@@ -19,7 +19,7 @@ def verticalAnomaly(player: any) -> any:
 
 # Changes the chance of an anomaly occurring
 # Each anomaly points to a function that applies the anomaly
-anomalyChance: float = 0.01
+anomalyChance: float = 0.02
 anomalies: dict[str, callable] = {
     "height": heightAnomaly,
     "vertical": verticalAnomaly,
@@ -35,6 +35,7 @@ def anomalyRoll(player: any) -> dict | bool:
     if receivedAnomaly:
         anomalyChosen = random.choice(list(anomalies.keys()))
         anomalyPlayer = anomalies[anomalyChosen](player)
+        anomalyPlayer.anomaly = True
         return anomalyPlayer
     else:
         return player

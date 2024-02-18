@@ -20,15 +20,17 @@
 
         <div class="col-12">
             <div class="card-group">
-                <!-- Announcements -->
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
-                            <h2>Announcements</h2>
+                            <h2>My Careers</h2>
                         </div>
-                        <div class="alert alert-light-dark">
-                            <p>🏆 A new champion has been crowned!</p>
-                        </div>
+                        <p>View your current and past careers.</p>
+                        {% for player in user.players.all %}
+                            <a href="{% url 'basketball:player' player.id %}" class="btn btn-dark btn-sm mb-1">
+                                <i class="bi bi-person-lines-fill"></i> ({{ player.id }}) {{ player.firstName }} {{ player.lastName }}
+                            </a><br>
+                        {% endfor %}
                     </div>
                 </div>
 

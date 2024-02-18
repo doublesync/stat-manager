@@ -194,4 +194,51 @@ startingAttributes: dict[str, dict[str, int]] = {
     },
 }
 
+attributeCategories: dict[str, list[str]] = {
+    "Shooting": [
+        "Post Fade",
+        "Post Hook",
+        "Post Moves",
+        "Midrange Shot",
+        "3pt Shot",
+        "Free Throw",
+        "Offensive Consistency",
+    ],
+    "Playmaking": [
+        "Ball Control",
+        "Passing IQ",
+        "Pass Accuracy",
+        "Shot IQ",
+        "Passing Vision",
+        "Hands",
+    ],
+    "Finishing": [
+        "Draw Foul",
+        "Driving Layup",
+        "Close Shot",
+        "Standing Dunk",
+        "Driving Dunk",
+    ],
+    "Defensive": [
+        "Offensive Rebound",
+        "Defensive Rebound",
+        "Interior Defense",
+        "Perimeter Defense",
+        "Block",
+        "Steal",
+        "Hustle",
+        "Pass Perception",
+        "Defensive Consistency",
+        "Help Defense IQ",
+    ],
+    "Physical": [
+        "Speed",
+        "Acceleration",
+        "Vertical",
+        "Strength",
+        "Lateral Quickness",
+        "Speed with Ball",
+    ],
+}
+
 # Starting attributes are set in pPhysical.py [!]
