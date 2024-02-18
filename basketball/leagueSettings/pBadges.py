@@ -2,90 +2,90 @@
 attributeDependentBadges: dict[str, dict[str, int]] = {
     # Bully
     "Bully": {
-        "Bronze": {
+        1: {
             "Strength": 75,
         },
-        "Silver": {
+        2: {
             "Strength": 83,
         },
-        "Gold": {
+        3: {
             "Strength": 90,
         },
-        "Hall of Fame": {
+        4: {
             "Strength": 95,
         },
     },
     # Brick Wall
     "Bully": {
-        "Bronze": {
+        1: {
             "Strength": 60,
         },
-        "Silver": {
+        2: {
             "Strength": 75,
         },
-        "Gold": {
+        3: {
             "Strength": 85,
         },
-        "Hall of Fame": {
+        4: {
             "Strength": 90,
         },
     },
     # Clamps
     "Clamps": {
-        "Bronze": {
+        1: {
             "Perimeter Defense": 75,
             "Strength": 45,
         },
-        "Silver": {
+        2: {
             "Perimeter Defense": 85,
             "Strength": 50,
         },
-        "Gold": {
+        3: {
             "Perimeter Defense": 93,
             "Strength": 55,
         },
-        "Hall of Fame": {
+        4: {
             "Perimeter Defense": 99,
             "Strength": 60,
         },
     },
     # Posterizer
     "Posterizer": {
-        "Bronze": {
+        1: {
             "Driving Dunk": 75,
             "Vertical": 70,
         },
-        "Silver": {
+        2: {
             "Driving Dunk": 86,
             "Vertical": 75,
         },
-        "Gold": {
+        3: {
             "Driving Dunk": 93,
             "Vertical": 80,
         },
-        "Hall of Fame": {
+        4: {
             "Driving Dunk": 99,
             "Vertical": 83,
         },
     },
     # Anchor
     "Anchor": {
-        "Bronze": {
+        1: {
             "Strength": 77,
         },
-        "Silver": {
+        2: {
             "Strength": 85,
         },
-        "Gold": {
+        3: {
             "Strength": 92,
         },
-        "Hall of Fame": {
+        4: {
             "Strength": 99,
         },
     },
 }
 
-badgeCategories = {
+badgeCategories: dict[str, list[str]] = {
     "Shooting": [
         "Agent 3",
         "Blinders",
@@ -172,6 +172,8 @@ badgeCategories = {
         "Work Horse",
     ],
 }
+
+badgePrices: dict[str, int] = {}
 
 
 def checkEligibility(player: any, badge: str, badgeTier: str) -> bool:
