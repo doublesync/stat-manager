@@ -13,7 +13,7 @@ def validatePlayerData(discordUser: any, data: dict) -> bool:
     # Check for how many players the user has
     players: any = models.BasketballPlayer.objects.filter(discordUser=discordUser)
     playerCount: int = len(players)
-    if playerCount >= 5:
+    if playerCount >= 1000:
         return [False, "You have too many players."]
 
 
