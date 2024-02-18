@@ -11,6 +11,8 @@ urlpatterns: list = [
     path("", RedirectView.as_view(url="home/")),
     path("home/", views.home, name="home"),
     path("create/", views.create, name="create"),
+    path("player/<int:id>/", views.player, name="player"),
     # HTMX endpoints
     path("create/htmx/attributes/", views.htmxStartingAttributes, name="htmxStartingAttributes"),
+    path("create/htmx/create/", views.htmxCreate, name="htmxCreate")
 ]
