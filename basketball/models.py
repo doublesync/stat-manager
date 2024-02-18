@@ -7,6 +7,8 @@ from copy import deepcopy
 
 # Create your models here
 class BasketballPlayer(models.Model):
+    cash: int = models.IntegerField(default=0)
+    anomaly: bool = models.BooleanField(default=False)
     firstName: str = models.CharField(max_length=32)
     lastName: str = models.CharField(max_length=32)
     height: int = models.IntegerField()
@@ -31,14 +33,17 @@ class BasketballPlayer(models.Model):
         max_length=2,
         choices=[(pos, pos) for pos in pDefault.positionChoices],
     )
-    # Copy the defualt attributes
     attributes: any = models.JSONField(default=pDefault.defaultAttributes, blank=True)
     badges: any = models.JSONField(default=pDefault.defaultBadges, blank=True)
     tendencies: any = models.JSONField(default=pDefault.defaultTendencies, blank=True)
 
     # Foreign keys
     discordUser: any = models.ForeignKey(
-        "core.DiscordUser", on_delete=models.SET_NULL, blank=True, null=True
+        "core.DiscordUser",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="players",
     )
     currentTeam: any = models.ForeignKey(
         "BasketballTeam", on_delete=models.SET_NULL, blank=True, null=True
