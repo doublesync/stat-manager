@@ -33,11 +33,11 @@
                         {% for attribute, value in player.attributes.items %}
                             {% if attribute in attributeCategories.Shooting %}
                                 {% if value <= 50 %}
-                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: maroon;">{{ value }}</span></h5>
+                                    <h5 class="card-subtitle mb-0 text-muted">(<span style="color: maroon;">{{ value }}</span>) {{ attribute }}</h5>
                                 {% elif value > 50 and value < 75 %}
-                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: orange;">{{ value }}</span></h5>
+                                    <h5 class="card-subtitle mb-0 text-muted">(<span style="color: orange;">{{ value }}</span>) {{ attribute }}</h5>
                                 {% else %}
-                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: green;">{{ value }}</span></h5>
+                                    <h5 class="card-subtitle mb-0 text-muted">(<span style="color: green;">{{ value }}</span>) {{ attribute }}</h5>
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
@@ -54,11 +54,11 @@
                         {% for attribute, value in player.attributes.items %}
                             {% if attribute in attributeCategories.Finishing %}
                                 {% if value <= 50 %}
-                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: maroon;">{{ value }}</span></h5>
+                                    <h5 class="card-subtitle mb-0 text-muted">(<span style="color: maroon;">{{ value }}</span>) {{ attribute }}</h5>
                                 {% elif value > 50 and value < 75 %}
-                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: orange;">{{ value }}</span></h5>
+                                    <h5 class="card-subtitle mb-0 text-muted">(<span style="color: orange;">{{ value }}</span>) {{ attribute }}</h5>
                                 {% else %}
-                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: green;">{{ value }}</span></h5>
+                                    <h5 class="card-subtitle mb-0 text-muted">(<span style="color: green;">{{ value }}</span>) {{ attribute }}</h5>
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
@@ -75,11 +75,11 @@
                         {% for attribute, value in player.attributes.items %}
                             {% if attribute in attributeCategories.Playmaking %}
                                 {% if value <= 50 %}
-                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: maroon;">{{ value }}</span></h5>
+                                    <h5 class="card-subtitle mb-0 text-muted">(<span style="color: maroon;">{{ value }}</span>) {{ attribute }}</h5>
                                 {% elif value > 50 and value < 75 %}
-                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: orange;">{{ value }}</span></h5>
+                                    <h5 class="card-subtitle mb-0 text-muted">(<span style="color: orange;">{{ value }}</span>) {{ attribute }}</h5>
                                 {% else %}
-                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: green;">{{ value }}</span></h5>
+                                    <h5 class="card-subtitle mb-0 text-muted">(<span style="color: green;">{{ value }}</span>) {{ attribute }}</h5>
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
@@ -97,11 +97,11 @@
                             {% if attribute in attributeCategories.Defensive %}
                                 <h5 class="card-subtitle mb-2 text-muted {% if value < 50 %}text-maroon{% elif value >= 50 and value < 75 %}text-orange{% else %}text-green{% endif %}"></h5>
                                 {% if value <= 50 %}
-                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: maroon;">{{ value }}</span></h5>
+                                    <h5 class="card-subtitle mb-0 text-muted">(<span style="color: maroon;">{{ value }}</span>) {{ attribute }}</h5>
                                 {% elif value > 50 and value < 75 %}
-                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: orange;">{{ value }}</span></h5>
+                                    <h5 class="card-subtitle mb-0 text-muted">(<span style="color: orange;">{{ value }}</span>) {{ attribute }}</h5>
                                 {% else %}
-                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: green;">{{ value }}</span></h5>
+                                    <h5 class="card-subtitle mb-0 text-muted">(<span style="color: green;">{{ value }}</span>) {{ attribute }}</h5>
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
@@ -119,11 +119,11 @@
                             {% if attribute in attributeCategories.Physical %}
                                 <h5 class="card-subtitle mb-2 text-muted {% if value < 50 %}text-maroon{% elif value >= 50 and value < 75 %}text-orange{% else %}text-green{% endif %}"></h5>
                                 {% if value <= 50 %}
-                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: maroon;">{{ value }}</span></h5>
+                                    <h5 class="card-subtitle mb-0 text-muted">(<span style="color: maroon;">{{ value }}</span>) {{ attribute }}</h5>
                                 {% elif value > 50 and value < 75 %}
-                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: orange;">{{ value }}</span></h5>
+                                    <h5 class="card-subtitle mb-0 text-muted">(<span style="color: orange;">{{ value }}</span>) {{ attribute }}</h5>
                                 {% else %}
-                                    <h5 class="card-subtitle mb-0 text-muted">{{ attribute }}: <span style="color: green;">{{ value }}</span></h5>
+                                    <h5 class="card-subtitle mb-0 text-muted">(<span style="color: green;">{{ value }}</span>) {{ attribute }}</h5>
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
