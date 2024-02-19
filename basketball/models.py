@@ -57,7 +57,7 @@ class BasketballPlayer(models.Model):
     def save(self, *args, **kwargs):
         self.bmi = pCalculate.calculateBMI(self.weight, self.height)
         self.formattedHeight = pCalculate.formatHeight(self.height)
-        self.attributes["Lateral Quickness"] = (player.attributes["Speed"] + player.attributes["Perimeter Defense"]) // 2 
+        self.attributes["Lateral Quickness"] = (self.attributes["Speed"] + self.attributes["Perimeter Defense"]) // 2 
         super().save(*args, **kwargs)
 
 
