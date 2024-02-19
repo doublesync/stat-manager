@@ -247,7 +247,7 @@ attributeCategories: dict[str, list[str]] = {
 # Starting attributes are set in pPhysical.py [!]
 
 attributePrices: dict[str, dict[range, int]] = {
-    "proficient": {
+    "Proficient": {
         realRange(0, 74): 1,
         realRange(75, 79): 2,
         realRange(80, 84): 4,
@@ -255,7 +255,7 @@ attributePrices: dict[str, dict[range, int]] = {
         realRange(90, 94): 8,
         realRange(95, 99): 10,
     },
-    "normal": {
+    "Normal": {
         realRange(0, 64): 1,
         realRange(65, 74): 2,
         realRange(75, 79): 4,
