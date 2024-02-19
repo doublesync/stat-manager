@@ -1,4 +1,4 @@
-from basketabll.leagueSettings.pHeight import realRange
+from basketball.leagueSettings.pHeight import realRange
 
 # Starting attributes depending on the players build will live here.
 physicalAttributes: list = [
