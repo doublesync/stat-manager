@@ -173,8 +173,18 @@ badgeCategories: dict[str, list[str]] = {
     ],
 }
 
-badgePrices: dict[str, int] = {}
+badgePrices: dict[str, int] = {
+    1: 4,
+    2: 6,
+    3: 12,
+    4: 25,
+}
 
+def checkBadgePrice(startLevel: int, endLevel: int) -> int:
+    cost: int = 0
+    for i in range(startLevel + 1, endLevel + 1):
+        cost += badgePrices[i]
+    return cost
 
 def checkEligibility(player: any, badge: str, badgeTier: str) -> bool:
     for attribute, value in attributeDependentBadges[badge][badgeTier].items():
