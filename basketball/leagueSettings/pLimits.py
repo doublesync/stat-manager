@@ -29,23 +29,18 @@ playerLimits: dict[str, dict[str, int]] = {
     "Giant": {
         "PG": {
             "heightLimits": [76, 79],
-            "weightLimits": [160, 200],
         },
         "SG": {
             "heightLimits": [77, 80],
-            "weightLimits": [180, 220],
         },
         "SF": {
             "heightLimits": [79, 82],
-            "weightLimits": [200, 240],
         },
         "PF": {
             "heightLimits": [81, 84],
-            "weightLimits": [220, 260],
         },
         "C": {
             "heightLimits": [84, 91],
-            "weightLimits": [240, 300],
         },
     },
 }
