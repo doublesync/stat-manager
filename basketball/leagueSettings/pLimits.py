@@ -31,13 +31,13 @@ playerLimits: dict[str, dict[str, int]] = {
             "heightLimits": [76, 79],
         },
         "SG": {
-            "heightLimits": [77, 80],
+            "heightLimits": [77, 81],
         },
         "SF": {
-            "heightLimits": [79, 82],
+            "heightLimits": [80, 83],
         },
         "PF": {
-            "heightLimits": [81, 84],
+            "heightLimits": [82, 85],
         },
         "C": {
             "heightLimits": [84, 91],
