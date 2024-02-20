@@ -11,9 +11,12 @@
                 </div>
                 <p>Welcome to the basketball menu.</p>
                 <div class="container">
-                    <a href="{% url 'basketball:create' %}" class="btn btn-dark btn-sm">
+                    <a href="{% url 'basketball:create' %}" class="btn btn-dark btn-sm mb-1" style="width:150px;">
                         <i class="bi bi-person-circle"></i> Begin Career
-                    </a>
+                    </a><br>
+                    <a href="{% url 'basketball:playerSearch' %}" class="btn btn-dark btn-sm mb-1" style="width:150px;">
+                        <i class="bi bi-search"></i> Search Players
+                    </a><br>
                 </div>
             </div>
         </div>

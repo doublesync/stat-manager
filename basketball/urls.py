@@ -12,7 +12,9 @@ urlpatterns: list = [
     path("home/", views.home, name="home"),
     path("create/", views.create, name="create"),
     path("player/<int:id>/", views.player, name="player"),
+    path("player/search/", views.playerSearch, name="playerSearch"),
     # HTMX endpoints
     path("create/htmx/attributes/", views.htmxStartingAttributes, name="htmxStartingAttributes"),
-    path("create/htmx/create/", views.htmxCreate, name="htmxCreate")
+    path("create/htmx/create/", views.htmxCreate, name="htmxCreate"),
+    path("player/search/htmx/", views.htmxSearchPlayer, name="htmxSearchPlayer"),
 ]

@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container mt-5 mb-5 p-2">
+    <div class="col-md-12 search-table-col">
+        <form>
+            {% csrf_token %}
+            <div class="form-group pull-right col-lg-4">
+                <input name="searchQuery" id="searchQuery" class="search form-control" type="text" placeholder="Search for players" hx-post="{% url 'basketball:htmxSearchPlayer' %}" hx-trigger="input changed delay:500ms, search" hx-target="#searchTable" hx-swap="innerHTML"/>
+            </div>
+            <span class="counter pull-right"></span>
+            <div id="searchTable">
+                {% include 'basketball/htmx/searchPlayerTable.html' %}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
