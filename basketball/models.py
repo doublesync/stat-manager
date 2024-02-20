@@ -8,7 +8,7 @@ from copy import deepcopy
 # Create your models here
 class BasketballPlayer(models.Model):
     cash: int = models.IntegerField(default=0)
-    anomaly: bool = models.BooleanField(default=False)
+    anomaly: str = models.CharField(max_length=32, default="None")
     firstName: str = models.CharField(max_length=32)
     lastName: str = models.CharField(max_length=32)
     height: int = models.IntegerField()
