@@ -42,6 +42,7 @@ def player(request, id: int) -> render:
     }
     return render(request, "basketball/player.html", context)
 
+
 def playerSearch(request) -> render:
     context: dict = {}
     # Paginate the BasketballPlayer queryset
@@ -51,6 +52,7 @@ def playerSearch(request) -> render:
     players: any = paginator.get_page(page)
     context["players"] = players
     return render(request, "basketball/playerSearch.html", context)
+
 
 # HTMX endpoints
 def htmxStartingAttributes(request) -> HttpResponse:
@@ -81,6 +83,7 @@ def htmxStartingAttributes(request) -> HttpResponse:
         }
         html: str = render_to_string("basketball/htmx/startingAttributes.html", context)
         return HttpResponse(html)
+        # fmt: on
 
 
 @login_required(login_url="/discord/login/")
@@ -113,11 +116,14 @@ def htmxCreate(request) -> HttpResponse:
         messages.error(request, "Player build is not valid - POST request not made.")
         return redirect("basketball:home")
 
+
 def htmxSearchPlayer(request) -> HttpResponse:
     if request.method == "POST":
         searchQuery: str = request.POST.get("searchQuery")
         if searchQuery:
-            playerList: any = BasketballPlayer.objects.filter(Q(firstName__icontains=searchQuery) | Q(lastName__icontains=searchQuery))
+            playerList: any = BasketballPlayer.objects.filter(
+                Q(firstName__icontains=searchQuery) | Q(lastName__icontains=searchQuery)
+            )
         else:
             playerList: any = BasketballPlayer.objects.all()
         paginator: any = Paginator(playerList, 10)
