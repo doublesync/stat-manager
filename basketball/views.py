@@ -133,14 +133,25 @@ def htmxCreate(request) -> HttpResponse:
 
 def htmxSearchPlayer(request) -> HttpResponse:
     if request.method == "POST":
+        # Check searchQuery
         searchQuery: str = request.POST.get("searchQuery")
         if searchQuery:
             playerList: any = BasketballPlayer.objects.filter(Q(firstName__icontains=searchQuery) | Q(lastName__icontains=searchQuery))
         else:
             playerList: any = BasketballPlayer.objects.all()
+
+        # Check sortQuery (if it exists)
+        sortQuery: str = request.GET.get("sortQuery")
+        if sortQuery:
+            sortField, sortDirection = sortQuery.split(":")
+            playerList = playerList.order_by(f"{sortField}{'-' if sortDirection == 'desc' else ''}")
+        
+        # Paginate the page
         paginator: any = Paginator(playerList, 10)
         page: int = request.GET.get("page")
         players: any = paginator.get_page(page)
+
+        # Return the page
         context: dict = {"players": players}
         html: str = render_to_string("basketball/htmx/searchPlayerTable.html", context)
         return HttpResponse(html)
