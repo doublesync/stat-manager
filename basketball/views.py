@@ -145,6 +145,7 @@ def htmxSearchPlayer(request) -> HttpResponse:
         if sortQuery:
             sortField, sortDirection = sortQuery.split(":")
             playerList = playerList.order_by(f"{sortField}{'-' if sortDirection == 'desc' else ''}")
+        print("Sort Query:", sortQuery)
         
         # Paginate the page
         paginator: any = Paginator(playerList, 10)
