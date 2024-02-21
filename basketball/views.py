@@ -17,6 +17,9 @@ import basketball.leagueSettings.pLimits as pLimits
 import basketball.playerScripts.pCreate as pCreate
 
 from basketball.models import BasketballPlayer
+from basketball.models import BasketballTeam
+from basketball.models import Voucher
+from basketball.models import VoucherReceipt
 
 import json
 
@@ -54,6 +57,19 @@ def playerSearch(request) -> render:
     return render(request, "basketball/playerSearch.html", context)
 
 
+def vouchers(request) -> render:
+    context: dict = {}
+    user: any = request.user
+    availableVouchers = []
+    # Get all vouchers that the user has not redeemed
+    for voucher in Voucher.objects.all():
+        if not VoucherReceipt.objects.filter(voucher=voucher, discordUser=user):
+            availableVouchers.append(voucher)
+    # Show all of the available vouchers
+    context["availableVouchers"] = availableVouchers
+    return render(request, "basketball/vouchers.html", context)
+
+
 # HTMX endpoints
 def htmxStartingAttributes(request) -> HttpResponse:
     if request.method == "POST":
@@ -83,7 +99,6 @@ def htmxStartingAttributes(request) -> HttpResponse:
         }
         html: str = render_to_string("basketball/htmx/startingAttributes.html", context)
         return HttpResponse(html)
-        # fmt: on
 
 
 @login_required(login_url="/discord/login/")
@@ -119,6 +134,7 @@ def htmxCreate(request) -> HttpResponse:
 
 def htmxSearchPlayer(request) -> HttpResponse:
     if request.method == "POST":
+        # Check searchQuery
         searchQuery: str = request.POST.get("searchQuery")
         if searchQuery:
             playerList: any = BasketballPlayer.objects.filter(
@@ -126,9 +142,54 @@ def htmxSearchPlayer(request) -> HttpResponse:
             )
         else:
             playerList: any = BasketballPlayer.objects.all()
+
+        # Check sortQuery (if it exists)
+        sortQuery: str = request.GET.get("sortQuery")
+        if sortQuery:
+            sortField, sortDirection = sortQuery.split(":")
+            playerList = playerList.order_by(
+                f"{sortField}{'-' if sortDirection == 'desc' else ''}"
+            )
+        print("Sort Query:", sortQuery)
+
+        # Paginate the page
         paginator: any = Paginator(playerList, 10)
         page: int = request.GET.get("page")
         players: any = paginator.get_page(page)
+
+        # Return the page
         context: dict = {"players": players}
         html: str = render_to_string("basketball/htmx/searchPlayerTable.html", context)
         return HttpResponse(html)
+
+
+def htmxVouchers(request) -> HttpResponse:
+    if request.method == "POST":
+        # Gather the voucher code
+        voucherCode: str = request.POST.get("voucherCode")
+        discordUser: any = request.user
+        # Check if the voucher exists
+        voucher: any = Voucher.objects.filter(code=voucherCode).first()
+        if not voucher:
+            messages.error(request, "Voucher does not exist.")
+            return redirect("basketball:vouchers")
+        # Check if the user has already redeemed the voucher
+        voucherReceipt: any = VoucherReceipt.objects.filter(
+            voucher=voucher, discordUser=discordUser
+        ).first()
+        if voucherReceipt:
+            messages.error(request, "You have already redeemed this voucher.")
+            return redirect("basketball:vouchers")
+        # Redeem the voucher & create a receipt
+        discordUserPlayers: any = BasketballPlayer.objects.filter(
+            discordUser=discordUser
+        )
+        for player in discordUserPlayers:
+            player.cash += voucher.amount
+            player.save()
+        VoucherReceipt.objects.create(voucher=voucher, discordUser=discordUser)
+        messages.success(request, "Voucher redeemed successfully.")
+        html: str = render_to_string("basketball/htmx/voucherHTMX.html")
+        # Return with HTMX refresh header
+        headers: dict = {"HX-Refresh": "true"}
+        return HttpResponse(html, headers=headers)

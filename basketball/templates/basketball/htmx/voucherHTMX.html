@@ -1,0 +1,7 @@
+{% for voucher in availableVouchers %}
+    <form>
+        {% csrf_token %}
+        <input type="hidden" name="voucherCode" value="{{ voucher.code }}">
+        <a href="#" class="btn btn-sm btn-success rounded-pill mb-2" hx-post="{% url 'basketball:htmxVouchers' %}" hx-trigger="click" hx-target="#voucherList" hx-swap="innerHTML">Claim Voucher</a> {{ voucher.code }} worth ${{ voucher.amount }}<br>
+    </form>
+{% endfor %}

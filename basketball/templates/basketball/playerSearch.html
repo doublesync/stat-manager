@@ -8,6 +8,30 @@
             <div class="form-group pull-right col-lg-4">
                 <input name="searchQuery" id="searchQuery" class="search form-control" type="text" placeholder="Search for players" hx-post="{% url 'basketball:htmxSearchPlayer' %}" hx-trigger="input changed delay:500ms, search" hx-target="#searchTable" hx-swap="innerHTML"/>
             </div>
+            <!-- Search query -->
+            <label for="sortQuery">Sort by:</label>
+            <select name="sortQuery" id="sortQuery" class="form-select form-select-sm" hx-post="{% url 'basketball:htmxSearchPlayer' %}" hx-trigger="changed" hx-target="#searchTable" hx-swap="innerHTML">
+                <optgroup label="Name">
+                    <option value="firstName:asc">First Name (ascending)</option>
+                    <option value="firstName:desc">First Name (descending)</option>
+                    <option value="lastName:asc">Last Name (ascending)</option>
+                    <option value="lastName:desc">Last Name (descending)</option>
+                </optgroup>
+                <optgroup label="Physical Attributes">
+                    <option value="height:asc">Height (ascending)</option>
+                    <option value="height:desc">Height (descending)</option>
+                    <option value="weight:asc">Weight (ascending)</option>
+                    <option value="weight:desc">Weight (descending)</option>
+                    <option value="wingspan:asc">Wingspan (ascending)</option>
+                    <option value="wingspan:desc">Wingspan (descending)</option>
+                </optgroup>
+                <optgroup label="Other">
+                    <option value="position:asc">Position (ascending)</option>
+                    <option value="position:desc">Position (descending)</option>
+                    <option value="archetype:asc">Archetype (ascending)</option>
+                    <option value="archetype:desc">Archetype (descending)</option>
+                </optgroup>
+            </select>
             <span class="counter pull-right"></span>
             <div id="searchTable">
                 {% include 'basketball/htmx/searchPlayerTable.html' %}

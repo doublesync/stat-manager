@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.db.models.fields.json import JSONField
 from jsoneditor.forms import JSONEditor
-from .models import BasketballPlayer, BasketballTeam
+from basketball.models import BasketballPlayer, BasketballTeam
+from basketball.models import Voucher, VoucherReceipt
 
 
 # Custom admin class
@@ -14,3 +15,5 @@ class myAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(BasketballPlayer, myAdmin)
 admin.site.register(BasketballTeam, myAdmin)
+admin.site.register(Voucher, myAdmin)
+admin.site.register(VoucherReceipt, myAdmin)

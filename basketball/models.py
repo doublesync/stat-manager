@@ -1,4 +1,5 @@
 from django.db import models
+from core.models import DiscordUser
 import basketball.leagueSettings.pDefault as pDefault
 import basketball.playerScripts.pCalculate as pCalculate
 
@@ -69,3 +70,21 @@ class BasketballTeam(models.Model):
 
     def __str__(self):
         return f"{self.city} {self.name}"
+
+
+class Voucher(models.Model):
+    code: str = models.CharField(max_length=32)
+    amount: int = models.IntegerField()
+    active: bool = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.code} - {self.amount}"
+
+
+class VoucherReceipt(models.Model):
+    discordUser: any = models.ForeignKey(DiscordUser, on_delete=models.CASCADE)
+    voucher: any = models.ForeignKey(Voucher, on_delete=models.CASCADE)
+    date: any = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.discordUser.discord_tag} used {self.voucher.code}"
