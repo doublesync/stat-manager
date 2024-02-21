@@ -16,7 +16,7 @@ attributeDependentBadges: dict[str, dict[str, int]] = {
         },
     },
     # Brick Wall
-    "Bully": {
+    "Brick Wall": {
         1: {
             "Strength": 60,
         },
