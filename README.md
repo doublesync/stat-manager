@@ -9,7 +9,7 @@
 - 🏆 Award/accolade tracking.
 - 👨‍🔬 Other optional simulation league logic.
 
-**Important: ** This project is configured for my own basketball league, The Association.
+This project is configured for my own basketball league, The Association.
 
 <h3 align="left">Contributors</h3>
 <p align="left">
