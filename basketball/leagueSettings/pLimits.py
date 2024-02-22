@@ -40,7 +40,7 @@ playerLimits: dict[str, dict[str, int]] = {
             "heightLimits": [82, 85],
         },
         "C": {
-            "heightLimits": [84, 91],
+            "heightLimits": [84, 88],
         },
     },
 }
