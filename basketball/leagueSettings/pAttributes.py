@@ -263,29 +263,33 @@ attributePrices: dict[str, dict[range, int]] = {
         realRange(85, 89): 7,
         realRange(90, 94): 10,
         realRange(95, 99): 11,
-    }
+    },
 }
 
 attributeProficiencies: dict[str, list[str]] = {
-  "Giant": [],
-  "Skilled": [],
-  "Athletic": [],
+    "Giant": [],
+    "Skilled": [],
+    "Athletic": [],
 }
 
-def checkProficiency(archetype: str, attribute: str) -> str:
-  proficiency: list = attributeProficiencies[archetype]
-  if attribute in proficiency:
-    return "Proficient"
-  else:
-    return "Normal"
 
-def checkAttributePrice(archetype: str, attribute: str, startLevel: int, endLevel: int) -> int:
-  cost: int = 0
-  proficiency: str = checkProficiency(archetype, attribute)
-  for i in range(startLevel + 1, endLevel + 1):
-    for priceRange in attributePrices[proficiency]:
-      if i in priceRange:
-        print(f"{i} will cost user {attributePrices[proficiency][priceRange]}")
-        cost += attributePrices[proficiency][priceRange]
-        continue
-  return cost
+def checkProficiency(archetype: str, attribute: str) -> str:
+    proficiency: list = attributeProficiencies[archetype]
+    if attribute in proficiency:
+        return "Proficient"
+    else:
+        return "Normal"
+
+
+def checkAttributePrice(
+    archetype: str, attribute: str, startLevel: int, endLevel: int
+) -> int:
+    cost: int = 0
+    proficiency: str = checkProficiency(archetype, attribute)
+    for i in range(startLevel + 1, endLevel + 1):
+        for priceRange in attributePrices[proficiency]:
+            if i in priceRange:
+                print(f"{i} will cost user {attributePrices[proficiency][priceRange]}")
+                cost += attributePrices[proficiency][priceRange]
+                continue
+    return cost
