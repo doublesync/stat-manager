@@ -241,7 +241,7 @@ badgeCategories: dict[str, list[str]] = {
     ],
 }
 
-badgePrices: dict[str, int] = {
+badgePrices: dict[int, int] = {
     1: 4,
     2: 6,
     3: 12,
