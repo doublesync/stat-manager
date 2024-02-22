@@ -134,6 +134,7 @@ def htmxCreate(request) -> HttpResponse:
 
 def htmxSearchPlayer(request) -> HttpResponse:
     if request.method == "POST":
+
         # Check searchQuery
         searchQuery: str = request.POST.get("searchQuery")
         if searchQuery:
@@ -144,13 +145,14 @@ def htmxSearchPlayer(request) -> HttpResponse:
             playerList: any = BasketballPlayer.objects.all()
 
         # Check sortQuery (if it exists)
-        sortQuery: str = request.GET.get("sortQuery")
+        sortQuery: str = request.POST.get("sortQuery")
         if sortQuery:
             sortField, sortDirection = sortQuery.split(":")
             playerList = playerList.order_by(
-                f"{sortField}{'-' if sortDirection == 'desc' else ''}"
+                f"{'-' if sortDirection == 'desc' else ''}{sortField}"
             )
-        print("Sort Query:", sortQuery)
+
+        print(f"Search: {searchQuery}, Sort: {sortQuery}")
 
         # Paginate the page
         paginator: any = Paginator(playerList, 10)
