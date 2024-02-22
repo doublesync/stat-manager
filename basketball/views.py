@@ -155,7 +155,7 @@ def htmxSearchPlayer(request) -> HttpResponse:
         print(f"Search: {searchQuery}, Sort: {sortQuery}")
 
         # Paginate the page
-        paginator: any = Paginator(playerList, 10)
+        paginator: any = Paginator(playerList, 15)
         page: int = request.GET.get("page")
         players: any = paginator.get_page(page)
 
