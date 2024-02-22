@@ -50,7 +50,7 @@ def playerSearch(request) -> render:
     context: dict = {}
     # Paginate the BasketballPlayer queryset
     playerList: any = BasketballPlayer.objects.all()
-    paginator: any = Paginator(playerList, 10)
+    paginator: any = Paginator(playerList, 15)
     page: int = request.GET.get("page")
     players: any = paginator.get_page(page)
     context["players"] = players
