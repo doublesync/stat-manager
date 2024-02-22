@@ -1,5 +1,5 @@
 # Attribute dependent badges will live inside of this file.
-attributeDependentBadges: dict[str, dict[str, int]] = {
+attributeDependentBadges: any = {
     # Shooting badges
     "Agent 3": {4: {"3pt Shot": 98}},
     "Catch & Shoot": {4: {"3pt Shot": 95, "Midrange Shot": 95}},
@@ -51,7 +51,7 @@ attributeDependentBadges: dict[str, dict[str, int]] = {
     # Playmaking badges
     "Ankle Breaker": {4: {"Ball Control": 94}},
     "Bail Out": {4: {"Pass Accuracy": 95}},
-    "Blow-By": {4: {"Ball Control": 96}},
+    "Blow-By": {"heightLimit": 83, 4: {"Ball Control": 96}},
     "Break Starter": {4: {"Pass Accuracy": 95}},
     "Dimer": {4: {"Pass Accuracy": 99}},
     "Hyperdrive": {4: {"Speed with Ball": 95}},
@@ -59,10 +59,10 @@ attributeDependentBadges: dict[str, dict[str, int]] = {
     "Physical Handles": {4: {"Ball Control": 90}},
     "Post Playmaker": {4: {"Passing Vision": 95}},
     "Relay Passer": {4: {"Passing Accuracy": 90}},
-    "Speed Booster": {"heightLimit": 81, 4: {"Ball Control": 99}},
+    "Speed Booster": {"heightLimit": 83, 4: {"Ball Control": 99}},
     "Touch Passer": {4: {"Passing Accuracy": 95}},
     "Triple Spike": {4: {"Ball Control": 92}},
-    "Unpluckable": {"heightLimit": 81, 4: {"Ball Control": 90}},
+    "Unpluckable": {"heightLimit": 84, 4: {"Ball Control": 90}},
     # Defensive badges
     "94 Feet": {4: {"Perimeter Defense": 90}},
     "Anchor": {4: {"Strength": 99}},
@@ -94,7 +94,7 @@ attributeDependentBadges: dict[str, dict[str, int]] = {
     "Work Horse": {4: {"Hustle": 90}},
 }
 
-attributeDependentBadges2: dict[str, dict[str, int]] = {
+attributeDependentBadges2: any = {
     "Posterizer": {
         1: {
             "Driving Dunk": 75,
