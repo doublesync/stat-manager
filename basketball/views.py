@@ -51,7 +51,7 @@ def playerSearch(request) -> render:
     context: dict = {}
     # Paginate the BasketballPlayer queryset
     playerList: any = BasketballPlayer.objects.all()
-    paginator: any = Paginator(playerList, 10)
+    paginator: any = Paginator(playerList, 15)
     page: int = request.GET.get("page")
     players: any = paginator.get_page(page)
     context["players"] = players
@@ -153,18 +153,36 @@ def htmxCreate(request) -> HttpResponse:
 
 def htmxSearchPlayer(request) -> HttpResponse:
     if request.method == "POST":
+
+        # Check searchQuery
         searchQuery: str = request.POST.get("searchQuery")
         if searchQuery:
-            playerList: any = BasketballPlayer.objects.filter(Q(firstName__icontains=searchQuery) | Q(lastName__icontains=searchQuery))
+            playerList: any = BasketballPlayer.objects.filter(
+                Q(firstName__icontains=searchQuery) | Q(lastName__icontains=searchQuery)
+            )
         else:
             playerList: any = BasketballPlayer.objects.all()
-        paginator: any = Paginator(playerList, 10)
+
+        # Check sortQuery (if it exists)
+        sortQuery: str = request.POST.get("sortQuery")
+        if sortQuery:
+            sortField, sortDirection = sortQuery.split(":")
+            playerList = playerList.order_by(
+                f"{'-' if sortDirection == 'desc' else ''}{sortField}"
+            )
+
+        print(f"Search: {searchQuery}, Sort: {sortQuery}")
+
+        # Paginate the page
+        paginator: any = Paginator(playerList, 15)
         page: int = request.GET.get("page")
         players: any = paginator.get_page(page)
+
+        # Return the page
         context: dict = {"players": players}
         html: str = render_to_string("basketball/htmx/searchPlayerTable.html", context)
         return HttpResponse(html)
-    
+
 
 def htmxVouchers(request) -> HttpResponse:
     if request.method == "POST":
@@ -177,12 +195,16 @@ def htmxVouchers(request) -> HttpResponse:
             messages.error(request, "Voucher does not exist.")
             return redirect("basketball:vouchers")
         # Check if the user has already redeemed the voucher
-        voucherReceipt: any = VoucherReceipt.objects.filter(voucher=voucher, discordUser=discordUser).first()
+        voucherReceipt: any = VoucherReceipt.objects.filter(
+            voucher=voucher, discordUser=discordUser
+        ).first()
         if voucherReceipt:
             messages.error(request, "You have already redeemed this voucher.")
             return redirect("basketball:vouchers")
-        # Redeem the voucher & create a receipt 
-        discordUserPlayers: any = BasketballPlayer.objects.filter(discordUser=discordUser)
+        # Redeem the voucher & create a receipt
+        discordUserPlayers: any = BasketballPlayer.objects.filter(
+            discordUser=discordUser
+        )
         for player in discordUserPlayers:
             player.cash += voucher.amount
             player.save()

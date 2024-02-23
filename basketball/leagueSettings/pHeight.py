@@ -77,12 +77,9 @@ heightOdds: dict[str, dict[str, dict[int, float]]] = {
         "C": {
             realRange(1, 25): 84,
             realRange(26, 65): 85,
-            realRange(66, 90): 86,
-            realRange(91, 96): 87,
-            realRange(97, 97): 88,
-            realRange(98, 98): 89,
-            realRange(99, 99): 90,
-            realRange(100, 100): 91,
+            realRange(66, 93): 86,
+            realRange(94, 99): 87,
+            realRange(100, 100): 88,
         },
     },
 }

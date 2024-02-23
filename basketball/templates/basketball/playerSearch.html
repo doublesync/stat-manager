@@ -6,7 +6,32 @@
         <form>
             {% csrf_token %}
             <div class="form-group pull-right col-lg-4">
-                <input name="searchQuery" id="searchQuery" class="search form-control" type="text" placeholder="Search for players" hx-post="{% url 'basketball:htmxSearchPlayer' %}" hx-trigger="input changed delay:500ms, search" hx-target="#searchTable" hx-swap="innerHTML"/>
+                <input name="searchQuery" id="searchQuery" class="search form-control mb-2" type="text" placeholder="Search for players" hx-post="{% url 'basketball:htmxSearchPlayer' %}" hx-trigger="input changed delay:500ms, search" hx-target="#searchTable" hx-swap="innerHTML"/>
+                <!-- Search query -->
+                <select name="sortQuery" id="sortQuery" class="form-select mb-2" hx-post="{% url 'basketball:htmxSearchPlayer' %}" hx-trigger="change" hx-target="#searchTable" hx-swap="innerHTML">
+                    <optgroup label="Name">
+                        <option value="firstName:asc">First Name (A-Z)</option>
+                        <option value="firstName:desc">First Name (Z-A)</option>
+                        <option value="lastName:asc">Last Name (A-Z)</option>
+                        <option value="lastName:desc">Last Name (Z-A)</option>
+                    </optgroup>
+                    <optgroup label="Physical Attributes">
+                        <option value="height:asc">Height (lowest)</option>
+                        <option value="height:desc">Height (highest)</option>
+                        <option value="weight:asc">Weight (lowest)</option>
+                        <option value="weight:desc">Weight (highest)</option>
+                        <option value="wingspan:asc">Wingspan (lowest)</option>
+                        <option value="wingspan:desc">Wingspan (highest)</option>
+                    </optgroup>
+                    <optgroup label="Other">
+                        <option value="position:asc">Position (A-Z)</option>
+                        <option value="position:desc">Position (Z-A)</option>
+                        <option value="archetype:asc">Archetype (A-Z)</option>
+                        <option value="archetype:desc">Archetype (Z-A)</option>
+                        <option value="anomaly:asc">Anomaly (A-Z)</option>
+                        <option value="anomaly:desc">Anomaly (Z-A)</option>
+                    </optgroup>
+                </select>
             </div>
             <span class="counter pull-right"></span>
             <div id="searchTable">

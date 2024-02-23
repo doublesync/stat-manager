@@ -173,36 +173,6 @@ startingPhysicals: dict[int, dict[str, int]] = {
             "Speed": 55,
         },
     },
-    89: {
-        "Default": {
-            "Vertical": 72,
-            "Speed": 45,
-        },
-        "Athletic": {
-            "Vertical": 82,
-            "Speed": 50,
-        },
-    },
-    90: {
-        "Default": {
-            "Vertical": 68,
-            "Speed": 42,
-        },
-        "Athletic": {
-            "Vertical": 78,
-            "Speed": 47,
-        },
-    },
-    91: {
-        "Default": {
-            "Vertical": 66,
-            "Speed": 40,
-        },
-        "Athletic": {
-            "Vertical": 76,
-            "Speed": 45,
-        },
-    },
 }
 
 
