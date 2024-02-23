@@ -7,6 +7,11 @@ import basketball.leagueSettings.pAnomaly as pAnomaly  # anomalyRoll()
 
 import basketball.models as models  # BasketballPlayer
 
+startingCash: dict[str, int] = {
+    "Skilled": 100,
+    "Athletic": 80,
+    "Giant": 70,
+}
 
 # Validate the player creation data
 def validatePlayerData(discordUser: any, data: dict) -> bool:
@@ -33,6 +38,7 @@ def createPlayer(discordUser: any, data: dict) -> any:
     weight: int = pWeight.getWeightFromModel(position, weightModel)
     # Create the player object
     player: any = models.BasketballPlayer(
+        cash=startingCash[archetype],
         firstName=firstName,
         lastName=lastName,
         position=position,
