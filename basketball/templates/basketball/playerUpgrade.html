@@ -23,21 +23,24 @@
                         <div class="card-body">
                             <div class="row">
                                 {% for category, attributes in attributeCategories.items %}
-                                    <div class="col-md-6">
-                                        <h5>{{ category }}</h5>
-                                        {% for attribute in attributes %}
-                                            {% for field in form %}
-                                                {% if 'attributes_' in field.name and attribute == field.name|cut:'attributes_' %}
-                                                    <div class="form-group">
-                                                        {{ field.label_tag }}
-                                                        {{ field }}
-                                                    </div>
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% endfor %}
-                                    </div>
+                                    {% if not category == 'Physical' %}
+                                        <div class="col-md-3 mb-4">
+                                            <h5 class="fw-bold">{{ category }}</h5><hr>
+                                            {% for attribute in attributes %}
+                                                {% for field in form %}
+                                                    {% if 'attributes_' in field.name and attribute == field.name|cut:'attributes_' %}
+                                                        <div class="form-group">
+                                                            <span class="mb-1">{{ field.label_tag }}</span>
+                                                            <span class="mb-1">{{ field }}</span>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endfor %} 
+                                            <hr>
+                                        </div>
+                                    {% endif %}
                                 {% endfor %}
-                            </div?
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -51,25 +54,28 @@
                             <h2>Badges</h2>
                         </div>
                         <div class="card-body">
-                            {% for category, badges in badgeCategories.items %}
-                                <h5>{{ category }}</h5>
-                                {% for badge in badges %}
-                                    {% for field in form %}
-                                        {% if 'badges_' in field.name and badge == field.name|cut:'badges_' %}
-                                            <div class="form-group">
-                                                {{ field.label_tag }}
-                                                {{ field }}
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endfor %}
-                            {% endfor %}
+                            <div class="row">
+                                {% for category, badges in badgeCategories.items %}
+                                    <div class="col-md-3">
+                                        <h5>{{ category }}</h5><hr>
+                                        {% for badge in badges %}
+                                            {% for field in form %}
+                                                {% if 'badges_' in field.name and badge == field.name|cut:'badges_' %}
+                                                    <div class="form-group">
+                                                        {{ field.label_tag }}
+                                                        {{ field }}
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                        <hr>
+                                    </div>
+                                {% endfor %}    
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-    
-            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 
     </div>

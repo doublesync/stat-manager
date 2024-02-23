@@ -11,13 +11,13 @@
                 </div>
                 <p>Welcome to the basketball menu.</p>
                 <div class="container">
-                    <a href="{% url 'basketball:create' %}" class="btn btn-dark btn-sm mb-1" style="width:150px;">
+                    <a href="{% url 'basketball:create' %}" class="btn btn-dark btn-sm mb-1 text-start" style="width:150px;">
                         <i class="bi bi-person-circle"></i> Begin Career
                     </a><br>
-                    <a href="{% url 'basketball:playerSearch' %}" class="btn btn-dark btn-sm mb-1" style="width:150px;">
+                    <a href="{% url 'basketball:playerSearch' %}" class="btn btn-dark btn-sm mb-1 text-start" style="width:150px;">
                         <i class="bi bi-search"></i> Search Players
                     </a><br>
-                    <a href="{% url 'basketball:vouchers' %}" class="btn btn-dark btn-sm mb-1" style="width:150px;">
+                    <a href="{% url 'basketball:vouchers' %}" class="btn btn-dark btn-sm mb-1 text-start" style="width:150px;">
                         <i class="bi bi-gift"></i> Claim Vouchers
                     </a><br>
                 </div>
@@ -34,9 +34,14 @@
                         <p>View your current and past careers.</p>
                         <div class="container">
                             {% for player in user.players.all %}
-                                <a href="{% url 'basketball:player' player.id %}" class="btn btn-dark btn-sm mb-1" style="width: 300px;">
-                                    <i class="bi bi-person-lines-fill"></i> ({{ player.id }}) {{ player.firstName }} {{ player.lastName }}
-                                </a><br>
+                                <div class="container">
+                                    <a href="{% url 'basketball:player' player.id %}" class="btn btn-dark btn-sm mb-1 text-start" style="width: 200px;">
+                                        <i class="bi bi-person-lines-fill"></i> {{ player.firstName }} {{ player.lastName }}
+                                    </a>
+                                    <a href="{% url 'basketball:playerUpgrade' player.id %}" class="btn btn-success btn-sm mb-1 text-start" style="width: 100px;">
+                                        <i class="bi bi-arrow-up-circle"></i> Upgrade
+                                    </a><br>
+                                </div>
                             {% endfor %}
                         </div>
                     </div>

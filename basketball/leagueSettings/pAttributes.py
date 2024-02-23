@@ -7,6 +7,7 @@ physicalAttributes: list = [
     "Vertical",
     "Strength",
     "Speed with Ball",
+    "Lateral Quickness",
 ]
 
 startingAttributes: dict[str, dict[str, int]] = {
@@ -234,14 +235,7 @@ attributeCategories: dict[str, list[str]] = {
         "Defensive Consistency",
         "Help Defense IQ",
     ],
-    "Physical": [
-        "Speed",
-        "Acceleration",
-        "Vertical",
-        "Strength",
-        "Lateral Quickness",
-        "Speed with Ball",
-    ],
+    "Physical": physicalAttributes,
 }
 
 # Starting attributes are set in pPhysical.py [!]

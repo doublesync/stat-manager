@@ -19,7 +19,16 @@
                     <td>{{ player.formattedHeight }}</td>
                     <td>{{ player.weight }}</td>
                     <td>{{ player.wingspan }}/100</td>
-                    <td>{{ player.archetype }}</td>
+                    <!-- Archetype-based icons -->
+                    {% if player.archetype == "Skilled" %}
+                        <td><i class="bi bi-award-fill"></i> {{ player.archetype }}</td>
+                    {% elif player.archetype == "Giant" %}
+                        <td><i class="bi bi-trophy-fill"></i> {{ player.archetype }}</td>
+                    {% elif player.archetype == "Athletic" %}
+                        <td><i class="bi bi-lightning-fill"></i> {{ player.archetype }}</td>
+                    {% else %}
+                        <td>{{ player.archetype }}</td>
+                    {% endif %}
                     <td>{{ player.anomaly }}</td>
                 </tr>
             {% endfor %}

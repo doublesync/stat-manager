@@ -1,6 +1,7 @@
 from django import forms
-from basketball.models import BasketballPlayer
 
+from basketball.models import BasketballPlayer
+from basketball.leagueSettings import pAttributes
 
 class BasketballPlayerForm(forms.ModelForm):
     class Meta:
@@ -37,11 +38,12 @@ class PlayerUpgradeForm(forms.Form):
         if player:
             # Add form fields dynamically based on the keys and values of the 'attributes' dictionary
             for key, value in player.attributes.items():
-                self.fields[f'attributes_{key}'] = forms.IntegerField(
-                    label=key, 
-                    initial=value,
-                    widget=forms.NumberInput(attrs={'class': 'form-control'})
-                )
+                if not key in pAttributes.physicalAttributes:
+                    self.fields[f'attributes_{key}'] = forms.IntegerField(
+                        label=key, 
+                        initial=value,
+                        widget=forms.NumberInput(attrs={'class': 'form-control'})
+                    )
 
             # Add form fields dynamically based on the keys and values of the 'badges' dictionary
             for key, value in player.badges.items():
