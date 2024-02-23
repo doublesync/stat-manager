@@ -34,24 +34,26 @@
             {% endfor %}
         </tbody>
     </table>
-    <!-- Create pagination buttons -->
-    <div class="d-flex justify-content-center">
-        <div class="pagination">
-            <span class="step-links">
-                {% if players.has_previous %}
-                    <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ players.previous_page_number }}">previous</a>
-                {% endif %}
+    <div id="pagination">
+        <!-- Create HTMX pagination buttons -->
+        <div class="d-flex justify-content-center">
+            <div class="pagination">
+                <span class="step-links">
+                    {% if players.has_previous %}
+                        <a href="#" class="btn btn-sm btn-dark mr-1" hx-post="{% url 'basketball:htmxSearchPlayer' %}?page=1" hx-trigger="click" hx-target="#searchTable" hx-swap="innerHTML">First</a>
+                        <a href="#" class="btn btn-sm btn-dark mr-1" hx-post="{% url 'basketball:htmxSearchPlayer' %}?page={{ players.previous_page_number }}" hx-trigger="click" hx-target="#searchTable" hx-swap="innerHTML">Back</a>
+                    {% endif %}
 
-                <span class="current">
-                    Page {{ players.number }} of {{ players.paginator.num_pages }}.
+                    <span class="current">
+                        Page {{ players.number }} of {{ players.paginator.num_pages }}.
+                    </span>
+
+                    {% if players.has_next %}
+                        <a href="#" class="btn btn-sm btn-dark mr-1" hx-post="{% url 'basketball:htmxSearchPlayer' %}?page={{ players.next_page_number }}" hx-trigger="click" hx-target="#searchTable" hx-swap="innerHTML">Next</a>
+                        <a href="#" class="btn btn-sm btn-dark mr-1" hx-post="{% url 'basketball:htmxSearchPlayer' %}?page={{ players.paginator.num_pages }}" hx-trigger="click" hx-target="#searchTable" hx-swap="innerHTML">Last</a>
+                    {% endif %}
                 </span>
-
-                {% if players.has_next %}
-                    <a href="?page={{ players.next_page_number }}">next</a>
-                    <a href="?page={{ players.paginator.num_pages }}">last &raquo;</a>
-                {% endif %}
-            </span>
+            </div>
         </div>
     </div>
 </div>

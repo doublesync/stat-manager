@@ -152,36 +152,34 @@ def htmxCreate(request) -> HttpResponse:
 
 
 def htmxSearchPlayer(request) -> HttpResponse:
-    if request.method == "POST":
+    # Check page
+    page: int = request.GET.get("page") 
 
-        # Check searchQuery
-        searchQuery: str = request.POST.get("searchQuery")
-        if searchQuery:
-            playerList: any = BasketballPlayer.objects.filter(
-                Q(firstName__icontains=searchQuery) | Q(lastName__icontains=searchQuery)
-            )
-        else:
-            playerList: any = BasketballPlayer.objects.all()
+    # Check searchQuery
+    searchQuery: str = request.POST.get("searchQuery")
+    if searchQuery:
+        playerList: any = BasketballPlayer.objects.filter(
+            Q(firstName__icontains=searchQuery) | Q(lastName__icontains=searchQuery)
+        )
+    else:
+        playerList: any = BasketballPlayer.objects.all()
 
-        # Check sortQuery (if it exists)
-        sortQuery: str = request.POST.get("sortQuery")
-        if sortQuery:
-            sortField, sortDirection = sortQuery.split(":")
-            playerList = playerList.order_by(
-                f"{'-' if sortDirection == 'desc' else ''}{sortField}"
-            )
+    # Check sortQuery (if it exists)
+    sortQuery: str = request.POST.get("sortQuery")
+    if sortQuery:
+        sortField, sortDirection = sortQuery.split(":")
+        playerList = playerList.order_by(
+            f"{'-' if sortDirection == 'desc' else ''}{sortField}"
+        )
 
-        print(f"Search: {searchQuery}, Sort: {sortQuery}")
+    # Paginate the page
+    paginator: any = Paginator(playerList, 15)
+    players: any = paginator.get_page(page)
 
-        # Paginate the page
-        paginator: any = Paginator(playerList, 15)
-        page: int = request.GET.get("page")
-        players: any = paginator.get_page(page)
-
-        # Return the page
-        context: dict = {"players": players}
-        html: str = render_to_string("basketball/htmx/searchPlayerTable.html", context)
-        return HttpResponse(html)
+    # Return the page
+    context: dict = {"players": players}
+    html: str = render_to_string("basketball/htmx/searchPlayerTable.html", context)
+    return HttpResponse(html)
 
 
 def htmxVouchers(request) -> HttpResponse:
