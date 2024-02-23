@@ -1,0 +1,76 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Player Upgrade{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="jumbotron mt-5 mb-5">
+            <h1 class="display-4">Player Upgrade</h1>
+            <p class="lead">Upgrade your basketball player's attributes and badges.</p>
+        </div>
+
+        <form method="post" action="{% url 'basketball:playerUpgrade' player.id %}">
+            {% csrf_token %}
+    
+            <!-- Attributes Section -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h2>Attributes</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                {% for category, attributes in attributeCategories.items %}
+                                    <div class="col-md-6">
+                                        <h5>{{ category }}</h5>
+                                        {% for attribute in attributes %}
+                                            {% for field in form %}
+                                                {% if 'attributes_' in field.name and attribute == field.name|cut:'attributes_' %}
+                                                    <div class="form-group">
+                                                        {{ field.label_tag }}
+                                                        {{ field }}
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                {% endfor %}
+                            </div?
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Badges Section -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h2>Badges</h2>
+                        </div>
+                        <div class="card-body">
+                            {% for category, badges in badgeCategories.items %}
+                                <h5>{{ category }}</h5>
+                                {% for badge in badges %}
+                                    {% for field in form %}
+                                        {% if 'badges_' in field.name and badge == field.name|cut:'badges_' %}
+                                            <div class="form-group">
+                                                {{ field.label_tag }}
+                                                {{ field }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+{% endblock %}

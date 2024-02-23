@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
 from basketball.forms import BasketballPlayerForm
+from basketball.forms import PlayerUpgradeForm
 
 import basketball.leagueSettings.pDefault as pDefault
 import basketball.leagueSettings.pAttributes as pAttributes
@@ -45,6 +46,7 @@ def player(request, id: int) -> render:
     }
     return render(request, "basketball/player.html", context)
 
+
 def playerSearch(request) -> render:
     context: dict = {}
     # Paginate the BasketballPlayer queryset
@@ -68,6 +70,24 @@ def vouchers(request) -> render:
     context["availableVouchers"] = availableVouchers
     return render(request, "basketball/vouchers.html", context)
 
+
+def playerUpgrade(request, id: int) -> render:
+
+    # Check if the user has permission to upgrade the player
+    user: any = request.user
+    player: any = BasketballPlayer.objects.get(pk=id)
+    if not player or player.discordUser != user:
+        messages.error(request, "You do not have permission to upgrade this player.")
+        return redirect("basketball:home")
+    
+    # Send the form to the template
+    context: dict = {
+        "player": player,
+        "form": PlayerUpgradeForm(player=player),
+        "attributeCategories": pAttributes.attributeCategories,
+        "badgeCategories": pBadges.badgeCategories,
+    }
+    return render(request, "basketball/playerUpgrade.html", context)
 
 # HTMX endpoints
 def htmxStartingAttributes(request) -> HttpResponse:

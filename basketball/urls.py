@@ -14,6 +14,7 @@ urlpatterns: list = [
     path("player/<int:id>/", views.player, name="player"),
     path("player/search/", views.playerSearch, name="playerSearch"),
     path("vouchers/", views.vouchers, name="vouchers"),
+    path("player/upgrade/<int:id>/", views.playerUpgrade, name="playerUpgrade"),
     # HTMX endpoints
     path("create/htmx/attributes/", views.htmxStartingAttributes, name="htmxStartingAttributes"),
     path("create/htmx/create/", views.htmxCreate, name="htmxCreate"),
