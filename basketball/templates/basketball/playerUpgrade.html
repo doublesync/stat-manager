@@ -34,7 +34,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-success" hx-post="{% url 'basketball:htmxPlayerUpgrade' player.id %}" hx-trigger="click" hx-target="#upgradeContainer" hx-swap="innerHTML">Upgrade</button>
+                                <button id="submitUpgrades" type="submit" class="btn btn-success" data-bs-dismiss="modal" hx-post="{% url 'basketball:htmxPlayerUpgrade' player.id %}" hx-trigger="click" hx-target="#upgradeContainer" hx-swap="innerHTML">Upgrade</button>
                             </div>
                         </div>
                     </div>
@@ -117,4 +117,5 @@
         </div>
 
     </div>
+
 {% endblock %}
