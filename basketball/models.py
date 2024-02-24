@@ -58,7 +58,9 @@ class BasketballPlayer(models.Model):
     def save(self, *args, **kwargs):
         self.bmi = pCalculate.calculateBMI(self.weight, self.height)
         self.formattedHeight = pCalculate.formatHeight(self.height)
-        self.attributes["Lateral Quickness"] = (self.attributes["Speed"] + self.attributes["Perimeter Defense"]) // 2 
+        self.attributes["Lateral Quickness"] = (
+            self.attributes["Speed"] + self.attributes["Perimeter Defense"]
+        ) // 2
         super().save(*args, **kwargs)
 
 
@@ -88,3 +90,14 @@ class VoucherReceipt(models.Model):
 
     def __str__(self):
         return f"{self.discordUser.discord_tag} used {self.voucher.code}"
+
+
+class UpgradeReceipt(models.Model):
+    discordUser: any = models.ForeignKey(DiscordUser, on_delete=models.CASCADE)
+    player: any = models.ForeignKey(BasketballPlayer, on_delete=models.CASCADE)
+    successful: any = models.JSONField()
+    failed: any = models.JSONField()
+    date: any = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.discordUser.discord_tag} upgraded {self.player.firstName} {self.player.lastName}"

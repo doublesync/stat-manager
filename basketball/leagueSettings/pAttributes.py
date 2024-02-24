@@ -261,10 +261,47 @@ attributePrices: dict[str, dict[range, int]] = {
 }
 
 attributeProficiencies: dict[str, list[str]] = {
+    "Fundamental": [
+        "Driving Layup",
+        "Draw Foul",
+        "Offensive Rebound",
+        "Defensive Rebound",
+        "Interior Defense",
+        "Perimeter Defense",
+        "Block",
+        "Steal",
+        "Hustle",
+        "Pass Perception",
+        "Defensive Consistency",
+        "Help Defense IQ",
+        "Offensive Consistency",
+        "Intangibles",
+        "Hands",
+        "Shot IQ",
+    ],
     "Giant": [],
-    "Skilled": [],
-    "Athletic": [],
+    "Skilled": [
+        "Post Fade",
+        "Post Hook",
+        "Post Moves",
+        "Close Shot",
+        "Midrange Shot",
+        "3pt Shot",
+        "Free Throw",
+        "Ball Control",
+        "Passing IQ",
+        "Passing Accuracy",
+        "Passing Vision",
+    ],
+    "Athletic": [
+        "Standing Dunk",
+        "Driving Dunk",
+    ],
 }
+
+attributeProficiencies["Giant"] += attributeProficiencies["Fundamental"]
+attributeProficiencies["Skilled"] += attributeProficiencies["Fundamental"]
+attributeProficiencies["Athletic"] += attributeProficiencies["Fundamental"]
 
 
 def checkProficiency(archetype: str, attribute: str) -> str:

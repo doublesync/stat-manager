@@ -16,6 +16,7 @@ import basketball.leagueSettings.pBadges as pBadges
 import basketball.leagueSettings.pPhysical as pPhysical
 import basketball.leagueSettings.pLimits as pLimits
 import basketball.playerScripts.pCreate as pCreate
+import basketball.playerScripts.pUpgrade as pUpgrade
 
 from basketball.models import BasketballPlayer
 from basketball.models import BasketballTeam
@@ -79,7 +80,7 @@ def playerUpgrade(request, id: int) -> render:
     if not player or player.discordUser != user:
         messages.error(request, "You do not have permission to upgrade this player.")
         return redirect("basketball:home")
-    
+
     # Send the form to the template
     context: dict = {
         "player": player,
@@ -88,6 +89,7 @@ def playerUpgrade(request, id: int) -> render:
         "badgeCategories": pBadges.badgeCategories,
     }
     return render(request, "basketball/playerUpgrade.html", context)
+
 
 # HTMX endpoints
 def htmxStartingAttributes(request) -> HttpResponse:
@@ -153,7 +155,7 @@ def htmxCreate(request) -> HttpResponse:
 
 def htmxSearchPlayer(request) -> HttpResponse:
     # Check page
-    page: int = request.GET.get("page") 
+    page: int = request.GET.get("page")
 
     # Check searchQuery
     searchQuery: str = request.POST.get("searchQuery")
@@ -212,3 +214,55 @@ def htmxVouchers(request) -> HttpResponse:
         # Return with HTMX refresh header
         headers: dict = {"HX-Refresh": "true"}
         return HttpResponse(html, headers=headers)
+
+
+def htmxPlayerCart(request, id: int) -> HttpResponse:
+    if request.method == "POST":
+        # Grab the player
+        player: any = BasketballPlayer.objects.get(pk=id)
+        # Grab the form data
+        form: any = PlayerUpgradeForm(request.POST, player=player)
+        context: dict = {
+            "player": player,
+        }
+        if form.is_valid():
+            # Grab the form data
+            cleanedData: dict = form.cleaned_data
+            # Format the data to be used in the upgrade form
+            upgradeCart: dict = pUpgrade.compileUpgradeData(player, cleanedData)
+            # Return the formatted dictionary in the context
+            context["upgradeCart"] = upgradeCart
+        else:
+            messages.error(request, "Player upgrade is not valid - form is not valid.")
+        # Return the HTMX template
+        html = render_to_string("basketball/htmx/cartHTMX.html", context)
+        return HttpResponse(html)
+    else:
+        messages.error(request, "Player upgrade is not valid - POST request not made.")
+        return redirect("basketball:home")
+
+
+def htmxPlayerUpgrade(request, id: int) -> HttpResponse:
+    if request.method == "POST":
+        # Grab the player and form validation
+        player: any = BasketballPlayer.objects.get(pk=id)
+        form: any = PlayerUpgradeForm(request.POST, player=player)
+        if form.is_valid():
+            # Grab the form data
+            cleanedData: dict = form.cleaned_data
+            # Validate the upgrade
+            upgradeCart: dict = pUpgrade.compileUpgradeData(player, cleanedData)
+            upgradeAttempt: list = pUpgrade.purchaseUpgrades(upgradeCart, player)
+            # Show errors from "failed" list
+            context: dict = {
+                "cost": upgradeAttempt["cost"],
+                "successful": upgradeAttempt["successful"],
+                "failed": upgradeAttempt["failed"],
+            }
+            # fmt: off
+            html: str = render_to_string("basketball/htmx/upgradeResponseHTMX.html", context)
+            # fmt: on
+            return HttpResponse(html)
+        else:
+            messages.error(request, "Player upgrade is not valid - form is not valid.")
+            return redirect("basketball:home")

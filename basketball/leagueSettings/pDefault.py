@@ -70,7 +70,7 @@ def defaultBadges() -> dict[str, int]:
         "Middy Magician": 0,
         "Open Looks": 0,
         "Post Fade Phenom": 0,
-        "Slippery OFf-Ball": 0,
+        "Slippery Off-Ball": 0,
         "Space Creator": 0,
         "Spot Finder": 0,
         # Playmaking badges

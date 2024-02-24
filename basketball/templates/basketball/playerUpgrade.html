@@ -10,73 +10,111 @@
             <p class="lead">Upgrade your basketball player's attributes and badges.</p>
         </div>
 
-        <form method="post" action="{% url 'basketball:playerUpgrade' player.id %}">
-            {% csrf_token %}
-    
-            <!-- Attributes Section -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h2>Attributes</h2>
+        <div id="upgradeContainer">
+            <form method="post" action="{% url 'basketball:playerUpgrade' player.id %}">
+                {% csrf_token %}
+
+                <!-- Submission Button that opens confirmation modal -->
+                <div class="row">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#confirmationModal">Upgrade</button>
+                    </div>
+                </div>
+
+                <!-- Confirmation Modal -->
+                <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to upgrade your player?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success" hx-post="{% url 'basketball:htmxPlayerUpgrade' player.id %}" hx-trigger="click" hx-target="#upgradeContainer" hx-swap="innerHTML">Upgrade</button>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <div class="row">
-                                {% for category, attributes in attributeCategories.items %}
-                                    {% if not category == 'Physical' %}
-                                        <div class="col-md-3 mb-4">
-                                            <h5 class="fw-bold">{{ category }}</h5><hr>
-                                            {% for attribute in attributes %}
+                    </div>
+                </div>
+
+                <!-- Upgrade Cart -->
+                {% include 'basketball/htmx/cartHTMX.html' %}
+
+                <!-- Attributes Section -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h2>Attributes</h2>
+                            </div>
+                            <!-- Display cash -->
+                            <div class="card-body">
+                                <h5><span class="fw-bold">Current Cash:</span> ${{ player.cash }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row" hx-post="{% url 'basketball:htmxPlayerCart' player.id %}" hx-trigger="change" hx-target="#cartTable" hx-swap="outerHTML">
+                                    {% for category, attributes in attributeCategories.items %}
+                                        {% if not category == 'Physical' %}
+                                            <div class="col-md-3 mb-4">
+                                                <h5 class="fw-bold">{{ category }}</h5><hr>
+                                                {% for attribute in attributes %}
+                                                    {% for field in form %}
+                                                        {% if 'attributes_' in field.name and attribute == field.name|cut:'attributes_' %}
+                                                            <div class="form-group">
+                                                                <span class="mb-1">{{ field.label_tag }}</span>
+                                                                <span class="mb-1">{{ field }}</span>
+                                                            </div>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endfor %} 
+                                                <hr>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Badges Section -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h2>Badges</h2>
+                            </div>
+                            <div class="card-body">
+                                <h5><span class="fw-bold">Current Cash:</span> ${{ player.cash }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row" hx-post="{% url 'basketball:htmxPlayerCart' player.id %}" hx-trigger="change" hx-target="#cartTable" hx-swap="outerHTML">
+                                    {% for category, badges in badgeCategories.items %}
+                                        <div class="col-md-3">
+                                            <h5>{{ category }}</h5><hr>
+                                            {% for badge in badges %}
                                                 {% for field in form %}
-                                                    {% if 'attributes_' in field.name and attribute == field.name|cut:'attributes_' %}
+                                                    {% if 'badges_' in field.name and badge == field.name|cut:'badges_' %}
                                                         <div class="form-group">
-                                                            <span class="mb-1">{{ field.label_tag }}</span>
-                                                            <span class="mb-1">{{ field }}</span>
+                                                            {{ field.label_tag }}
+                                                            {{ field }}
                                                         </div>
                                                     {% endif %}
                                                 {% endfor %}
-                                            {% endfor %} 
+                                            {% endfor %}
                                             <hr>
                                         </div>
-                                    {% endif %}
-                                {% endfor %}
+                                    {% endfor %}    
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-    
-            <!-- Badges Section -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h2>Badges</h2>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                {% for category, badges in badgeCategories.items %}
-                                    <div class="col-md-3">
-                                        <h5>{{ category }}</h5><hr>
-                                        {% for badge in badges %}
-                                            {% for field in form %}
-                                                {% if 'badges_' in field.name and badge == field.name|cut:'badges_' %}
-                                                    <div class="form-group">
-                                                        {{ field.label_tag }}
-                                                        {{ field }}
-                                                    </div>
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% endfor %}
-                                        <hr>
-                                    </div>
-                                {% endfor %}    
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
 
     </div>
 {% endblock %}

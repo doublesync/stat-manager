@@ -3,6 +3,7 @@ from django.db.models.fields.json import JSONField
 from jsoneditor.forms import JSONEditor
 from basketball.models import BasketballPlayer, BasketballTeam
 from basketball.models import Voucher, VoucherReceipt
+from basketball.models import UpgradeReceipt
 
 
 # Custom admin class
@@ -17,3 +18,4 @@ admin.site.register(BasketballPlayer, myAdmin)
 admin.site.register(BasketballTeam, myAdmin)
 admin.site.register(Voucher, myAdmin)
 admin.site.register(VoucherReceipt, myAdmin)
+admin.site.register(UpgradeReceipt, myAdmin)

@@ -1,0 +1,41 @@
+<!-- Create table for upgradeCart -->
+<table id="cartTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Old Level</th>
+            <th>New Level</th>
+            <th>Cost</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if not upgradeCart %}
+            <tr>
+                <td colspan="4">No items in cart</td>
+            </tr>
+        {% endif %}
+        {% for attribute, details in upgradeCart.attributes.items %}
+            {{ item }}
+            <tr>
+                <td>{{ attribute }}</td>
+                <td>{{ details.0 }}</td>
+                <td>{{ details.1}}
+                <td>${{ details.2 }}</td>
+            </tr>
+        {% endfor %}
+        {% for badge, details in upgradeCart.badges.items %}
+            <tr>
+                <td>{{ badge }}</td>
+                <td>{{ details.0 }}</td>
+                <td>{{ details.1}}
+                <td>${{ details.2 }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">Total</td>
+            <td>${{ upgradeCart.cost }}
+        </tr>
+    </tfoot>
+</table>

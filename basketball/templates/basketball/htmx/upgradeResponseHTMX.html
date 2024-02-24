@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="jumbotron mt-5 mb-5">
+        <h2 class="display-4">Upgrade Response</h2>
+        <p class="lead">The results of your player upgrade.</p>
+    </div>
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Successful Upgrades</h4>
+        <ul>
+            {% if not successful %}
+                <li>No upgrades were successful</li>
+            {% endif %}
+            {% for upgrade in successful.attributes %}
+                <li>✅ <strong>{{ upgrade.0 }}</strong> was upgraded from <strong>({{ upgrade.1 }})</strong> to <strong>({{ upgrade.2 }})</strong> for <strong>${{ upgrade.3 }}</strong></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Failed Upgrades</h4>
+        <ul>
+            {% if not failed %}
+                <li>✅ No upgrades failed</li>
+            {% endif %}
+            {% for failedUpgrade in failed %}
+                <li>🛑 <strong>{{ failedUpgrade.0 }}</strong> failed to upgrade - <strong>{{ failedUpgrade.1 }}</strong></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Upgrade Details</h4>
+        <p><strong>Total Cost:</strong> ${{ cost }}</p>
+    </div>
+</div>

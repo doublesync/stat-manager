@@ -20,4 +20,6 @@ urlpatterns: list = [
     path("create/htmx/create/", views.htmxCreate, name="htmxCreate"),
     path("player/search/htmx/", views.htmxSearchPlayer, name="htmxSearchPlayer"),
     path("vouchers/htmx/", views.htmxVouchers, name="htmxVouchers"),
+    path("player/upgrade/htmx/cart/<int:id>/", views.htmxPlayerCart, name="htmxPlayerCart"),
+    path("player/upgrade/htmx/complete/<int:id>/", views.htmxPlayerUpgrade, name="htmxPlayerUpgrade"),
 ]
