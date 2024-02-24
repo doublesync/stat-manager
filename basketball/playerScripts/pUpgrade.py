@@ -72,15 +72,14 @@ def validateUpgrades(data: dict, player: any):
             startLevel=oldLevel,
             endLevel=newLevel,
         )
-        # If player passes all checks, add to successful upgrades
-        upgradeCart["cost"] += individualCost
         # Check if the player has enough cash to purchase the upgrade
         # fmt: off
-        if player.cash < upgradeCart["cost"]:
+        if player.cash < (upgradeCart["cost"] + individualCost):
             upgradeCart["failed"].append(["Cash", "Not enough cash to purchase upgrades"])
             return upgradeCart
         # fmt: on
         # Add to the successful upgrades list
+        upgradeCart["cost"] += individualCost
         upgradeCart["successful"]["attributes"].append(
             [attributeName, oldLevel, newLevel, individualCost]
         )
@@ -100,15 +99,14 @@ def validateUpgrades(data: dict, player: any):
             continue
         # Add cash to the cost
         individualCost = pBadges.checkBadgePrice(startLevel=oldLevel, endLevel=newLevel)
-        # If player passes all checks, add to successful upgrades
-        upgradeCart["cost"] += individualCost
         # Check if the player has enough cash to purchase the upgrade
         # fmt: off
-        if player.cash < upgradeCart["cost"]:
+        if player.cash < (upgradeCart["cost"] + individualCost):
             upgradeCart["failed"].append(["Cash", "Not enough cash to purchase upgrades"])
             return upgradeCart
         # fmt: on
         # Add to the successful upgrades list
+        upgradeCart["cost"] += individualCost
         upgradeCart["successful"]["badges"].append(
             [badgeName, oldLevel, newLevel, individualCost]
         )

@@ -283,7 +283,8 @@ def htmxPlayerUpgrade(request, id: int) -> HttpResponse:
             # fmt: off
             html: str = render_to_string("basketball/htmx/upgradeResponseHTMX.html", context)
             # fmt: on
-            sendUpgradeWebhook(player, upgradeAttempt)
+            if upgradeAttempt["successful"]["attributes"] or upgradeAttempt["successful"]["badges"]:
+                sendUpgradeWebhook(player, upgradeAttempt)
             # Return the HTMX template
             return HttpResponse(html)
         else:
