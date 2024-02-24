@@ -12,6 +12,9 @@
             {% for upgrade in successful.attributes %}
                 <li>✅ <strong>{{ upgrade.0 }}</strong> was upgraded from <strong>({{ upgrade.1 }})</strong> to <strong>({{ upgrade.2 }})</strong> for <strong>${{ upgrade.3 }}</strong></li>
             {% endfor %}
+            {% for upgrade in successful.badges %}
+                <li>✅ <strong>{{ upgrade.0 }}</strong> was upgraded from <strong>({{ upgrade.1 }})</strong> to <strong>({{ upgrade.2 }})</strong> for <strong>${{ upgrade.3 }}</strong></li>
+            {% endfor %}
         </ul>
     </div>
     <div class="alert alert-danger" role="alert">

@@ -58,6 +58,7 @@ def validateUpgrades(data: dict, player: any):
     upgradeAttributes: any = data["attributes"]
     upgradeBadges: any = data["badges"]
     # Check limits. If any are exceeded, return False
+    # Attribute upgrades
     for attributeName, upgradeList in upgradeAttributes.items():
         oldLevel: int = upgradeList[0]
         newLevel: int = upgradeList[1]
@@ -83,7 +84,7 @@ def validateUpgrades(data: dict, player: any):
         upgradeCart["successful"]["attributes"].append(
             [attributeName, oldLevel, newLevel, individualCost]
         )
-
+    # Badge upgrades
     for badgeName, upgradeList in upgradeBadges.items():
         oldLevel: int = upgradeList[0]
         newLevel: int = upgradeList[1]
@@ -91,11 +92,11 @@ def validateUpgrades(data: dict, player: any):
             upgradeCart["failed"].append([badgeName, "Badge limit exceeded"])
             continue
         # Check if the user is eligible for the badge
-        canUpgrade: bool = pBadges.checkEligibility(player, badgeName, newLevel)
+        eligibleBadge: bool = pBadges.checkEligibility(player, badgeName, newLevel)
+        canUpgrade: bool = eligibleBadge[0]
+        errorReason: str = eligibleBadge[1]
         if not canUpgrade:
-            upgradeCart["failed"].append(
-                [badgeName, "User is not eligible for this badge"]
-            )
+            upgradeCart["failed"].append([badgeName, errorReason.upper()])
             continue
         # Add cash to the cost
         individualCost = pBadges.checkBadgePrice(startLevel=oldLevel, endLevel=newLevel)

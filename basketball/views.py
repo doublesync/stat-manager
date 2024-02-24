@@ -253,6 +253,7 @@ def htmxPlayerUpgrade(request, id: int) -> HttpResponse:
             # Validate the upgrade
             upgradeCart: dict = pUpgrade.compileUpgradeData(player, cleanedData)
             upgradeAttempt: list = pUpgrade.purchaseUpgrades(upgradeCart, player)
+            print(json.dumps(upgradeAttempt, indent=4))
             # Show errors from "failed" list
             context: dict = {
                 "cost": upgradeAttempt["cost"],

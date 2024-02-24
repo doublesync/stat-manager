@@ -58,9 +58,9 @@ attributeDependentBadges: any = {
     "Killer Combos": {4: {"Ball Control": 98}},
     "Physical Handles": {4: {"Ball Control": 90}},
     "Post Playmaker": {4: {"Passing Vision": 95}},
-    "Relay Passer": {4: {"Passing Accuracy": 90}},
+    "Relay Passer": {4: {"Pass Accuracy": 90}},
     "Speed Booster": {"heightLimit": 83, 4: {"Ball Control": 99}},
-    "Touch Passer": {4: {"Passing Accuracy": 95}},
+    "Touch Passer": {4: {"Pass Accuracy": 95}},
     "Triple Spike": {4: {"Ball Control": 92}},
     "Unpluckable": {"heightLimit": 84, 4: {"Ball Control": 90}},
     # Defensive badges
@@ -260,16 +260,17 @@ def checkEligibility(player: any, badge: str, badgeTier: int) -> any:
     if badge in attributeDependentBadges:
         # Check if the badgeTier is in the dictionary
         if not badgeTier in attributeDependentBadges[badge]:
-            return True
+            return [True, True]
         # Check if the player is too tall for the badge (1st dictionary)
         if "heightLimit" in attributeDependentBadges[badge]:
             if player.height > attributeDependentBadges[badge]["heightLimit"]:
                 # Check if players above the height limit are allowed to have the badge
                 if not "overHeightMax" in attributeDependentBadges[badge]:
-                    return False
-                else:
-                    if badgeTier > attributeDependentBadges[badge]["overHeightMax"]:
-                        return False
+                    return [False, "Player is too tall for this badge"]
+                elif badgeTier > attributeDependentBadges[badge]["overHeightMax"]:
+                    # fmt: off
+                    return [False, f"Player is too tall for this badge (max tier: {attributeDependentBadges[badge]['overHeightMax']})"]
+                    # fmt: on
         # These badges require only one attribute to be met
         if badgeTier in attributeDependentBadges[badge]:
             for attribute, value in attributeDependentBadges[badge][badgeTier].items():
@@ -277,30 +278,34 @@ def checkEligibility(player: any, badge: str, badgeTier: int) -> any:
                 if player.attributes[attribute] < value:
                     continue
                 else:
-                    return True
+                    return [True, True]
             # If the player meets no requirements
-            return False
-
+            return [False, f"{badge} requires {attribute} to be at least {value}"]
     elif badge in attributeDependentBadges2:
         # Check if the badgeTier is in the dictionary
         if not badgeTier in attributeDependentBadges2[badge]:
-            return True
+            return [True, True]
         # Check if the player is too tall for the badge (2nd dictionary)
         if "heightLimit" in attributeDependentBadges2[badge]:
             if player.height > attributeDependentBadges2[badge]["heightLimit"]:
                 # Check if players above the height limit are allowed to have the badge
                 if not "overHeightMax" in attributeDependentBadges2[badge]:
-                    return False
-                else:
-                    if badgeTier > attributeDependentBadges2[badge]["overHeightMax"]:
-                        return False
+                    return [False, "Player is too tall for this badge"]
+                elif badgeTier > attributeDependentBadges2[badge]["overHeightMax"]:
+                    # fmt: off
+                    return [False, f"Player is too tall for this badge (max tier: {attributeDependentBadges2[badge]['overHeightMax']})"]
+                    # fmt: on
         # These badges require all attributes to be met
         if badgeTier in attributeDependentBadges2[badge]:
             for attribute, value in attributeDependentBadges2[badge][badgeTier].items():
                 # Player only has to meet both requirements
                 if player.attributes[attribute] < value:
-                    return False
-            return True
+                    # fmt: off
+                    return [False, f"Requires {attribute} to be at least {value}"]
+                    # fmt: on
+            return [True, True]
+    else:
+        return [True, True]
 
 
 # class MockPlayer:

@@ -290,7 +290,7 @@ attributeProficiencies: dict[str, list[str]] = {
         "Free Throw",
         "Ball Control",
         "Passing IQ",
-        "Passing Accuracy",
+        "Pass Accuracy",
         "Passing Vision",
     ],
     "Athletic": [
