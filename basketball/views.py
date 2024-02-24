@@ -40,7 +40,9 @@ def create(request) -> render:
 
 
 def player(request, id: int) -> render:
+    user: any = request.user
     context = {
+        "user": user,
         "player": BasketballPlayer.objects.get(id=id),
         "attributeCategories": pAttributes.attributeCategories,
         "badgeCategories": pBadges.badgeCategories,

@@ -12,9 +12,12 @@ class DiscordUser(models.Model):
     flags: int = models.IntegerField()
     locale: str = models.CharField(max_length=100)
     mfa_enabled: bool = models.BooleanField()
-    last_login: str = models.DateTimeField(null=True)
-    last_reward: str = models.DateTimeField(null=True)
-    my_players: any = models.ManyToManyField("basketball.BasketballPlayer", null=True)
+    last_login: str = models.DateTimeField(null=True, blank=True)
+    last_reward: str = models.DateTimeField(null=True, blank=True)
+    my_players: any = models.ManyToManyField(
+        "basketball.BasketballPlayer", null=True, blank=True
+    )
+    admin: bool = models.BooleanField(default=False)
 
     def is_authenticated(self, request) -> bool:
         return True

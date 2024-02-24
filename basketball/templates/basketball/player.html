@@ -22,6 +22,40 @@
         </div>
     </div>
 
+    {% if user.admin %}
+
+        <!-- ADMIN ACTIONS -->
+        <h1 class="mb-4">Admin Actions</h1>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">Edit Cash</h2>
+                        <form>
+                            <div class="form-group">
+                                {% csrf_token %}
+                                <label for="cash" class="mb-2">Add or remove cash from player</label>
+                                <!-- Put cash input side by side checkbox -->
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="cashAmount" name="cashAmount" placeholder="Enter amount">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" id="takeAway" name="takeAway" value="true">
+                                            <label for="takeAway" class="p-2 form-check-label">Take Away</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Button to open accordion with submit button -->
+                            <button class="btn btn-info mt-2" type="submit">Send Request</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+
     <!-- ATTRIBUTE CATEGORIES -->
     <h1 class="mb-4">Attributes</h1>
     <div class="row">
