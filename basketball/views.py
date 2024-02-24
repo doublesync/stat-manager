@@ -23,6 +23,8 @@ from basketball.models import BasketballTeam
 from basketball.models import Voucher
 from basketball.models import VoucherReceipt
 
+import core.discord.discordWebhook as discordWebhook
+
 import json
 
 
@@ -244,6 +246,22 @@ def htmxPlayerCart(request, id: int) -> HttpResponse:
         return redirect("basketball:home")
 
 
+def sendUpgradeWebhook(player, upgradeAttempt) -> None:
+    bodyMessage: str = ""
+    if upgradeAttempt["successful"]["attributes"]:
+        for details in upgradeAttempt["successful"]["attributes"]:
+            bodyMessage += (
+                f"✅ **{details[0]}** upgraded from **{details[1]}** to **{details[2]}**.\n"
+            )
+    if upgradeAttempt["successful"]["badges"]:
+        for details in upgradeAttempt["successful"]["badges"]:
+            bodyMessage += f"✅ **{details[0]}** upgraded from **{details[1]}** to **{details[2]}**.\n"
+    bodyMessage += f"\n[View profile?](https://stat-manager-8e8740f61676.herokuapp.com/basketball/player/{player.id})"
+    discordWebhook.send_webhook(
+        "upgrade",
+        title=f"({ player.id }) {player.firstName} {player.lastName} upgraded for ${upgradeAttempt["cost"]}!",
+        message=bodyMessage,
+    )
 def htmxPlayerUpgrade(request, id: int) -> HttpResponse:
     if request.method == "POST":
         # Grab the player and form validation
@@ -265,6 +283,8 @@ def htmxPlayerUpgrade(request, id: int) -> HttpResponse:
             # fmt: off
             html: str = render_to_string("basketball/htmx/upgradeResponseHTMX.html", context)
             # fmt: on
+            sendUpgradeWebhook(player, upgradeAttempt)
+            # Return the HTMX template
             return HttpResponse(html)
         else:
             messages.error(request, "Player upgrade is not valid - form is not valid.")
