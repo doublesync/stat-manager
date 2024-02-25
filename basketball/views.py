@@ -280,6 +280,7 @@ def htmxEditCash(request, id: int) -> HttpResponse:
         # Grab the form data
         discordUser: any = request.user
         player: any = BasketballPlayer.objects.get(pk=id)
+        payStatus: str = ""
         # Check if the user has permission to edit the player's cash
         if discordUser.admin:
             cashAmount: int = request.POST.get("cashAmount")
@@ -288,10 +289,9 @@ def htmxEditCash(request, id: int) -> HttpResponse:
                 # Add or take the cash from the player
                 player.cash += int(cashAmount) if not takeCash else -int(cashAmount)
                 player.save()
-                messages.success(
-                    request,
-                    f"Successfully added ${cashAmount} to {player.firstName} {player.lastName}.",
-                )
+                # fmt: off
+                payStatus = f"✅ Successfully added ${cashAmount} to {player.firstName} {player.lastName}.",
+                # fmt: on
                 # Create a cash receipt
                 receipt = CashReceipt(
                     discordUser=discordUser,
@@ -301,8 +301,7 @@ def htmxEditCash(request, id: int) -> HttpResponse:
                 )
                 receipt.save()
             else:
-                messages.error(request, "Invalid cash amount.")
+                payStatus = "❌ Invalid cash amount."
 
             # Return the HTMX refresh header (refreshes the page)
-            headers: dict = {"HX-Refresh": "true"}
-            return HttpResponse(headers=headers)
+            return HttpResponse(payStatus)
