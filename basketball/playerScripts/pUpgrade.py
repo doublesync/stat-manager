@@ -40,7 +40,7 @@ def compileUpgradeData(player: any, data: dict[str, int]) -> dict:
                 upgradeData["badges"][badgeName] = [badgeLevel, int(newValue), badgeCost]
                 upgradeData["cost"] += badgeCost
     # Check if there's anything in upgradeData before returning
-    if upgradeData["attributes"] and not upgradeData["badges"]:
+    if upgradeData["attributes"] and upgradeData["badges"]:
         return upgradeData
     else:
         return None
