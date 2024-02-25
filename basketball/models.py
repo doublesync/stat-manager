@@ -136,13 +136,13 @@ class CashReceipt(models.Model):
     def save(self, *args, **kwargs):
         # Create the message
         bodyMessage: str = (
-            f"✅ **{self.amount}** cash given to **{self.player.firstName} {self.player.lastName}**.\n"
+            f"✅ **{self.amount}** cash {'taken' if self.taken else 'given'} to **{self.player.firstName} {self.player.lastName}**.\n"
         )
         bodyMessage += f"\n[View profile?](https://stat-manager-8e8740f61676.herokuapp.com/basketball/player/{self.player.id})"
         # Send the webhook
         discordWebhook.send_webhook(
             "cash",
-            title=f"({self.player.id}) {self.player.firstName} {self.player.lastName} received ${self.amount}!",
+            title=f"({self.player.id}) {self.player.firstName} {self.player.lastName} {'lost' if self.taken else 'gained'} ${self.amount}!",
             message=bodyMessage,
         )
         # Save the model
