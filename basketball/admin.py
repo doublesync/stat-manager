@@ -4,6 +4,7 @@ from jsoneditor.forms import JSONEditor
 from basketball.models import BasketballPlayer, BasketballTeam
 from basketball.models import Voucher, VoucherReceipt
 from basketball.models import UpgradeReceipt
+from basketball.models import CashReceipt
 
 
 # Custom admin class
@@ -19,3 +20,4 @@ admin.site.register(BasketballTeam, myAdmin)
 admin.site.register(Voucher, myAdmin)
 admin.site.register(VoucherReceipt, myAdmin)
 admin.site.register(UpgradeReceipt, myAdmin)
+admin.site.register(CashReceipt, myAdmin)

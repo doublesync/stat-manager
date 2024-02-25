@@ -22,6 +22,7 @@ from basketball.models import BasketballPlayer
 from basketball.models import BasketballTeam
 from basketball.models import Voucher
 from basketball.models import VoucherReceipt
+from basketball.models import CashReceipt
 
 import core.discord.discordWebhook as discordWebhook
 
@@ -246,22 +247,6 @@ def htmxPlayerCart(request, id: int) -> HttpResponse:
         return redirect("basketball:home")
 
 
-def sendUpgradeWebhook(player, upgradeAttempt) -> None:
-    bodyMessage: str = ""
-    if upgradeAttempt["successful"]["attributes"]:
-        for details in upgradeAttempt["successful"]["attributes"]:
-            bodyMessage += (
-                f"✅ **{details[0]}** upgraded from **{details[1]}** to **{details[2]}**.\n"
-            )
-    if upgradeAttempt["successful"]["badges"]:
-        for details in upgradeAttempt["successful"]["badges"]:
-            bodyMessage += f"✅ **{details[0]}** upgraded from **{details[1]}** to **{details[2]}**.\n"
-    bodyMessage += f"\n[View profile?](https://stat-manager-8e8740f61676.herokuapp.com/basketball/player/{player.id})"
-    discordWebhook.send_webhook(
-        "upgrade",
-        title=f"({ player.id }) {player.firstName} {player.lastName} upgraded for ${upgradeAttempt["cost"]}!",
-        message=bodyMessage,
-    )
 def htmxPlayerUpgrade(request, id: int) -> HttpResponse:
     if request.method == "POST":
         # Grab the player and form validation
@@ -272,21 +257,52 @@ def htmxPlayerUpgrade(request, id: int) -> HttpResponse:
             cleanedData: dict = form.cleaned_data
             # Validate the upgrade
             upgradeCart: dict = pUpgrade.compileUpgradeData(player, cleanedData)
-            upgradeAttempt: list = pUpgrade.purchaseUpgrades(upgradeCart, player)
-            print(json.dumps(upgradeAttempt, indent=4))
-            # Show errors from "failed" list
-            context: dict = {
-                "cost": upgradeAttempt["cost"],
-                "successful": upgradeAttempt["successful"],
-                "failed": upgradeAttempt["failed"],
-            }
-            # fmt: off
-            html: str = render_to_string("basketball/htmx/upgradeResponseHTMX.html", context)
-            # fmt: on
-            if upgradeAttempt["successful"]["attributes"] or upgradeAttempt["successful"]["badges"]:
-                sendUpgradeWebhook(player, upgradeAttempt)
+            if upgradeCart:
+                upgradeAttempt: list = pUpgrade.purchaseUpgrades(upgradeCart, player)
+                # Show errors from "failed" list
+                context: dict = {
+                    "cost": upgradeAttempt["cost"],
+                    "successful": upgradeAttempt["successful"],
+                    "failed": upgradeAttempt["failed"],
+                }
             # Return the HTMX template
+            # fmt: off
+            html: str = render_to_string("basketball/htmx/upgradeResponseHTMX.html", context if upgradeCart else {})
             return HttpResponse(html)
+            # fmt: on
         else:
             messages.error(request, "Player upgrade is not valid - form is not valid.")
             return redirect("basketball:home")
+
+
+def htmxEditCash(request, id: int) -> HttpResponse:
+    if request.method == "POST":
+        # Grab the form data
+        discordUser: any = request.user
+        player: any = BasketballPlayer.objects.get(pk=id)
+        # Check if the user has permission to edit the player's cash
+        if discordUser.admin:
+            cashAmount: int = request.POST.get("cashAmount")
+            takeCash: bool = request.POST.get("takeCash")
+            if cashAmount:
+                # Add or take the cash from the player
+                player.cash += int(cashAmount) if not takeCash else -int(cashAmount)
+                player.save()
+                messages.success(
+                    request,
+                    f"Successfully added ${cashAmount} to {player.firstName} {player.lastName}.",
+                )
+                # Create a cash receipt
+                receipt = CashReceipt(
+                    discordUser=discordUser,
+                    player=player,
+                    amount=cashAmount,
+                    taken=True if takeCash else False,
+                )
+                receipt.save()
+            else:
+                messages.error(request, "Invalid cash amount.")
+
+            # Return the HTMX refresh header (refreshes the page)
+            headers: dict = {"HX-Refresh": "true"}
+            return HttpResponse(headers=headers)

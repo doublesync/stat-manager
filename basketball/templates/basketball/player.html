@@ -31,7 +31,7 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <h2 class="card-title">Edit Cash</h2>
-                        <form>
+                        <form id="editCashForm">
                             <div class="form-group">
                                 {% csrf_token %}
                                 <label for="cash" class="mb-2">Add or remove cash from player</label>
@@ -40,14 +40,14 @@
                                     <input type="number" class="form-control" id="cashAmount" name="cashAmount" placeholder="Enter amount">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
-                                            <input type="checkbox" id="takeAway" name="takeAway" value="true">
-                                            <label for="takeAway" class="p-2 form-check-label">Take Away</label>
+                                            <input type="checkbox" id="takeCash" name="takeCash" value="true">
+                                            <label for="takeCash" class="p-2 form-check-label">Take Away</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- Button to open accordion with submit button -->
-                            <button class="btn btn-info mt-2" type="submit">Send Request</button>
+                            <button class="btn btn-info mt-2" hx-post="{% url 'basketball:htmxEditCash' player.id %}" hx-trigger="click" hx-target="#editCashForm" hx-swap="outerHTML">Send Request</button>
                         </form>
                     </div>
                 </div>
