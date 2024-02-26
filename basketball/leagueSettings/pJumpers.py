@@ -567,7 +567,7 @@ jumperList: list = {
 }
 
 
-def rollJumper(height: int = 72) -> list:
+def rollJumper(height: int) -> list:
     # Find the jumperList to pull from
     for heightRange, jumpers in jumperList.items():
         if height in heightRange:
