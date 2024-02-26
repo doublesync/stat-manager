@@ -70,6 +70,9 @@ class BasketballPlayer(models.Model):
         # Calculate the jumpshot (only skilled players choose their jumpshot)
         if self.jumpshot == "None" and self.archetype != "Skilled":
             self.jumpshot = pJumpers.rollJumper(self.height)
+            # fmt: off
+            print(f"{self.firstName} {self.lastName} has a new jumpshot: {self.jumpshot}")
+            # fmt: on
         # Save the model
         super().save(*args, **kwargs)
 
