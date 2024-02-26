@@ -139,6 +139,8 @@ class CashReceipt(models.Model):
     player: any = models.ForeignKey(BasketballPlayer, on_delete=models.CASCADE)
     amount: int = models.IntegerField()
     taken: bool = models.BooleanField(default=False)
+    payReason: str = models.CharField(max_length=30, default="None")
+    jobType: str = models.CharField(max_length=10, default="Misc")
     date: any = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
