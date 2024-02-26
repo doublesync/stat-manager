@@ -17,6 +17,10 @@
                 <li class="list-group-item"><strong>BMI:</strong> {{ player.bmi }}</li>
                 <li class="list-group-item"><strong>Archetype:</strong> {{ player.archetype }}</li>
                 <li class="list-group-item"><strong>Position:</strong> {{ player.position }}/{{ player.secondaryPosition }}</li>
+                {% if player.archetype != "Skilled" %}
+                    <li class="list-group-item"><strong>Jumpshot:</strong> {{ player.jumpshot }}</li>
+                {% endif %}
+                <li class="list-group-item"><strong>Team:</strong> {{ player.currentTeam }}</li>
                 <li class="list-group-item"><strong>User:</strong> {{ player.discordUser }}</li>
             </ul>
         </div>
