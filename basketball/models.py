@@ -4,6 +4,7 @@ from core.models import DiscordUser
 from core.discord import discordWebhook
 import basketball.leagueSettings.pDefault as pDefault
 import basketball.playerScripts.pCalculate as pCalculate
+import basketball.leagueSettings.pJumpers as pJumpers
 
 from copy import deepcopy
 
@@ -39,6 +40,7 @@ class BasketballPlayer(models.Model):
     attributes: any = models.JSONField(default=pDefault.defaultAttributes, blank=True)
     badges: any = models.JSONField(default=pDefault.defaultBadges, blank=True)
     tendencies: any = models.JSONField(default=pDefault.defaultTendencies, blank=True)
+    jumpshot: str = models.CharField(default="None", max_length=32, blank=True)
 
     # Foreign keys
     discordUser: any = models.ForeignKey(
@@ -58,11 +60,17 @@ class BasketballPlayer(models.Model):
 
     # Overriding the save method to calculate some things
     def save(self, *args, **kwargs):
+        # Calculate the BMI and formatted height
         self.bmi = pCalculate.calculateBMI(self.weight, self.height)
         self.formattedHeight = pCalculate.formatHeight(self.height)
+        # Calculate the lateral quickness
         self.attributes["Lateral Quickness"] = (
             self.attributes["Speed"] + self.attributes["Perimeter Defense"]
         ) // 2
+        # Calculate the jumpshot (only skilled players choose their jumpshot)
+        if self.jumpshot == "None" and self.archetype != "Skilled":
+            self.jumpshot = pJumpers.rollJumper(self.height)
+        # Save the model
         super().save(*args, **kwargs)
 
 
