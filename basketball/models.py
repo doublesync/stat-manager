@@ -149,7 +149,7 @@ class CashReceipt(models.Model):
     def save(self, *args, **kwargs):
         # Create the message
         bodyMessage: str = (
-            f"💵 **{self.amount}** cash {'taken' if self.taken else 'given'}: **{self.player.firstName} {self.player.lastName}**.\n"
+            f"💵 **{self.amount}** cash {'taken' if self.taken else 'given'}: **{self.player.firstName} {self.player.lastName}**.\n```Job Type: {self.jobType}```\n```Reason: {self.payReason}```"
         )
         bodyMessage += f"\n[View profile?](https://stat-manager-8e8740f61676.herokuapp.com/basketball/player/{self.player.id})"
         # Send the webhook
