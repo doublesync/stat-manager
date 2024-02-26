@@ -284,6 +284,8 @@ def htmxEditCash(request, id: int) -> HttpResponse:
         if discordUser.admin:
             cashAmount: int = request.POST.get("cashAmount")
             takeCash: bool = request.POST.get("takeCash")
+            payReason: str = request.POST.get("payReason")
+            jobType: str = request.POST.get("jobType")
             if cashAmount:
                 # Add or take the cash from the player
                 player.cash += int(cashAmount) if not takeCash else -int(cashAmount)
@@ -298,6 +300,8 @@ def htmxEditCash(request, id: int) -> HttpResponse:
                     player=player,
                     amount=cashAmount,
                     taken=True if takeCash else False,
+                    payReason=payReason,
+                    jobType=jobType,
                 )
                 receipt.save()
             else:
