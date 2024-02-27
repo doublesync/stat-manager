@@ -38,6 +38,20 @@ attributeDependentBadges: any = {
             "Strength": 95,
         },
     },
+    "Bully": {
+        1: {
+            "Strength": 75,
+        },
+        2: {
+            "Strength": 83,
+        },
+        3: {
+            "Strength": 90,
+        },
+        4: {
+            "Strength": 95,
+        },
+    },
     "Dream Shake": {4: {"Post Moves": 90}},
     "Fast Twitch": {4: {"Standing Dunk": 97, "Close Shot": 97}},
     "Fearless Finisher": {4: {"Driving Layup": 95}},
