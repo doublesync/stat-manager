@@ -24,7 +24,7 @@ attributeDependentBadges: any = {
     "Backdown Punisher": {4: {"Post Moves": 99}},
     "Big Driver": {4: {"Ball Control": 80}},
     "Bunny": {4: {"Driving Layup": 94, "Driving Dunk": 94}},
-    "Bully": {
+    "Bulldozer": {
         1: {
             "Strength": 75,
         },
