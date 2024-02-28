@@ -38,31 +38,26 @@
                         <form id="editCashForm">
                             <div class="form-group">
                                 {% csrf_token %}
-                                <label for="cash" class="mb-2">Add or remove cash from player</label>
+                                <label for="cash" class="mt-2 mb-2">Add or remove cash from player</label>
                                 <!-- Put cash input side by side checkbox -->
-                                <div class="input-group">
                                     <input type="number" class="form-control" id="cashAmount" name="cashAmount" placeholder="Enter amount">
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <input type="checkbox" id="takeCash" name="takeCash" value="true">
-                                            <label for="takeCash" class="p-2 form-check-label">Take Away</label>
-                                        </div>
-                                    </div>
-                                    <br>
+                                    <label for="payReason" class="mt-2 mb-2">Reason</label>
                                     <input type="text" class="form-control" id="payReason" name="payReason" placeholder="Enter reason for payment">
-                                    <br>
+                                    <label for="jobType" class="mt-2 mb-2">Job Type</label>
                                     <select class="form-control" id="jobType" name="jobType">
                                         <option value="Job">Job</option>
                                         <option value="Event">Event</option>
                                         <option value="Manager">Manager</option>
                                         <option value="Admin">Admin</option>
-                                        <option value="ErrorFix">ErrorFix</option>
+                                        <option value="Error Fix">Error Fix</option>
                                         <option value="Misc">Misc</option>
-                                    </select>
+                                    </select><hr>
+                                    <input type="checkbox" id="takeCash" name="takeCash" value="true">
+                                    <label for="takeCash" class="p-2 form-check-label">Take Cash</label><hr>
                                 </div>
+                                <button class="btn btn-info mt-2" hx-post="{% url 'basketball:htmxEditCash' player.id %}" hx-trigger="click" hx-target="#editCashForm" hx-swap="outerHTML">Send Request</button>
                             </div>
                             <!-- Button to open accordion with submit button -->
-                            <button class="btn btn-info mt-2" hx-post="{% url 'basketball:htmxEditCash' player.id %}" hx-trigger="click" hx-target="#editCashForm" hx-swap="outerHTML">Send Request</button>
                         </form>
                     </div>
                 </div>
