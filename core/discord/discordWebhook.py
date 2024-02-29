@@ -1,8 +1,8 @@
 from discord_webhook import DiscordWebhook, DiscordEmbed
 
 webhook_urls: dict[str, str] = {
-    "upgrade": "https://discord.com/api/webhooks/1210969397192032328/LUoSubn5hUy36jLc5tbqVyQSNUU7RW8-F4pQoyNBhrPJFn3e5bLBaWKGkiG5csbbQh6d",
-    "cash": "https://discord.com/api/webhooks/1211369168687988756/g0qHmEl71ZMtNQ7JjohHsMH-Bz60Nk-CB4euzWus2SdK12F88wCDQKwpMdhnP5E186RD",
+    "upgrade": "https://discord.com/api/webhooks/1212877354213445702/IaPkjxax2gWqTSBYEQrqC4A1ebOD1GA1tSIbPcsOqPijHW6z3xr1RaMtpDa8TDZolADQ",
+    "cash": "https://discord.com/api/webhooks/1212877633046446210/dbZH4oNTMbJcFN4J2eOmwn55cNNjoJnFnz1usi0VSfQ6iQCK4sgTOjZZQDfqpdIjp3de",
 }
 
 default_webhook_msg: str = "Webhook test message"
