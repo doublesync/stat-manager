@@ -17,6 +17,7 @@ import basketball.leagueSettings.pPhysical as pPhysical
 import basketball.leagueSettings.pLimits as pLimits
 import basketball.playerScripts.pCreate as pCreate
 import basketball.playerScripts.pUpgrade as pUpgrade
+import basketball.playerScripts.pFrivolities as pFrivolities
 
 from basketball.models import BasketballPlayer
 from basketball.models import BasketballTeam
@@ -94,6 +95,19 @@ def playerUpgrade(request, id: int) -> render:
         "badgeCategories": pBadges.badgeCategories,
     }
     return render(request, "basketball/playerUpgrade.html", context)
+
+
+def leagueFrivolities(request) -> render:
+    context: dict = {
+        "spentFrivolity": pFrivolities.spentFrivolity(),
+        "earnedFrivolity": pFrivolities.earnedFrivolity(),
+        "positionFrivolity": pFrivolities.positionFrivolity(),
+        "archetypeFrivolity": pFrivolities.archetypeFrivolity(),
+        "heightFrivolity": pFrivolities.heightFrivolity(),
+        "weightModelFrivolity": pFrivolities.weightModelFrivolity(),
+        "bmiFrivolity": pFrivolities.bmiFrivolity(),
+    }
+    return render(request, "basketball/leagueFrivolities.html", context)
 
 
 # HTMX endpoints

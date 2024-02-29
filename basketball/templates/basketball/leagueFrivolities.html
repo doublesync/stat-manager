@@ -1,0 +1,168 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <div class="container mt-4 mt-4">
+
+        <h2>League Frivolities</h2><hr>
+
+        <div class="row mt-4">
+
+            <div class="col-md-12">
+                <h4>Spent Frivolity</h4>
+                <div class="table-responsive table table-hover table-bordered results">
+                    <table class="table table-hover table-bordered">
+                        <thead class="bill-header cs">
+                            <tr>
+                                <th id="trs-hd-1" class="col-lg-2">Name</th>
+                                <th id="trs-hd-2" class="col-lg-1">Earned</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key, value in spentFrivolity.items %}
+                                <tr>
+                                    <td>{{ key }}</td>
+                                    <td>{{ value }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <h4>Earned Frivolity</h4>
+                <div class="table-responsive table table-hover table-bordered results">
+                    <table class="table table-hover table-bordered">
+                        <thead class="bill-header cs">
+                            <tr>
+                                <th id="trs-hd-1" class="col-lg-2">Name</th>
+                                <th id="trs-hd-2" class="col-lg-1">Earned</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key, value in earnedFrivolity.items %}
+                                <tr>
+                                    <td>{{ key }}</td>
+                                    <td>{{ value }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <h4>Position Frivolity</h4>
+                <div class="table-responsive table table-hover table-bordered results">
+                    <table class="table table-hover table-bordered">
+                        <thead class="bill-header cs">
+                            <tr>
+                                <th id="trs-hd-1" class="col-lg-2">Position</th>
+                                <th id="trs-hd-2" class="col-lg-1">Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key, value in positionFrivolity.items %}
+                                <tr>
+                                    <td>{{ key }}</td>
+                                    <td>{{ value }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <h4>Archetype Frivolity</h4>
+                <div class="table-responsive table table-hover table-bordered results">
+                    <table class="table table-hover table-bordered">
+                        <thead class="bill-header cs">
+                            <tr>
+                                <th id="trs-hd-1" class="col-lg-2">Archetype</th>
+                                <th id="trs-hd-2" class="col-lg-1">Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key, value in archetypeFrivolity.items %}
+                                <tr>
+                                    <td>{{ key }}</td>
+                                    <td>{{ value }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <h4>Height Frivolity</h4>
+                <div class="table-responsive table table-hover table-bordered results">
+                    <table class="table table-hover table-bordered">
+                        <thead class="bill-header cs">
+                            <tr>
+                                <th id="trs-hd-1" class="col-lg-2">Height</th>
+                                <th id="trs-hd-2" class="col-lg-1">Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key, value in heightFrivolity.items %}
+                                <tr>
+                                    <td>{{ key }}</td>
+                                    <td>{{ value }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <h4>Weight Frivolity</h4>
+                <div class="table-responsive table table-hover table-bordered results">
+                    <table class="table table-hover table-bordered">
+                        <thead class="bill-header cs">
+                            <tr>
+                                <th id="trs-hd-1" class="col-lg-2">Weight</th>
+                                <th id="trs-hd-2" class="col-lg-1">Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key, value in weightModelFrivolity.items %}
+                                <tr>
+                                    <td>{{ key }}</td>
+                                    <td>{{ value }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <h4>BMI Frivolity</h4>
+                <div class="table-responsive table table-hover table-bordered results">
+                    <table class="table table-hover table-bordered">
+                        <thead class="bill-header cs">
+                            <tr>
+                                <th id="trs-hd-1" class="col-lg-2">Name</th>
+                                <th id="trs-hd-2" class="col-lg-1">BMI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key, value in bmiFrivolity.items %}
+                                <tr>
+                                    <td>{{ key }}</td>
+                                    <td>{{ value }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
