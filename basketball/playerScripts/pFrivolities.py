@@ -15,6 +15,7 @@ def calculateTotalSpent(player) -> list[int]:
         for badge in receipt.successful["badges"]:
             totalSpent += badge[3]
     # Now calculate the total earned
+    totalEarned += totalSpent
     for receipt in cashReceipts:
         totalEarned += receipt.amount if not receipt.taken else -(receipt.amount)
     return [totalSpent, totalEarned]  # [0] = totalSpent, [1] = totalEarned
