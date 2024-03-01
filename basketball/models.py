@@ -79,9 +79,8 @@ class BasketballPlayer(models.Model):
 
 class BasketballTeam(models.Model):
     name: str = models.CharField(max_length=32)
-    city: str = models.CharField(max_length=32)
-    titles: int = models.IntegerField(default=0)
     players: any = models.ManyToManyField(BasketballPlayer, null=True, blank=True)
+    color: str = models.CharField(max_length=32, default="#434648")
 
     def __str__(self):
         return f"{self.city} {self.name}"
