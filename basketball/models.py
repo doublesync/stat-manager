@@ -83,7 +83,7 @@ class BasketballTeam(models.Model):
     color: str = models.CharField(max_length=32, default="#434648")
 
     def __str__(self):
-        return f"{self.city} {self.name}"
+        return self.name
 
 
 class Voucher(models.Model):
