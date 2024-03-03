@@ -122,6 +122,7 @@ class UpgradeReceipt(models.Model):
             bodyMessage += f"✅ **{details[0]}** upgraded from **{details[1]}** to **{details[2]}**.\n"
         for details in self.successful["badges"]:
             bodyMessage += f"✅ **{details[0]}** upgraded from **{details[1]}** to **{details[2]}**.\n"
+        bodyMessage += f"\nPlays for: **{self.player.currentTeam}**"
         bodyMessage += f"\n[View profile?](https://stat-manager-8e8740f61676.herokuapp.com/basketball/player/{self.player.id})"
         # Send the webhook
         discordWebhook.send_webhook(
