@@ -1,8 +1,6 @@
-
-
 <h1 align="center">Welcome, this is 👋 stat-tracker</h1>
 <h3 align="center">An open-source statistic tracker for sports leagues.</h3>
-<p>This was a project for an online basketball simulation league. It was a slated to be a successor to our [original league.](https://github.com/doublesync/django-hoops)</p>
+<p>This was a project for an online basketball simulation league. It was a slated to be a successor to our original league: https://github.com/doublesync/django-hoops</p> 
 
 - 💹 Statistic tracking and display.
 - 👶 Player and team creation.
