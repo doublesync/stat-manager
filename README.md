@@ -9,7 +9,7 @@
 - 🏆 Award/accolade tracking.
 - 👨‍🔬 Other optional simulation league logic.
 
-This project is configured for my own basketball league, The Association.
+This project is configured for my own basketball league, The Association. Originally, we planned on implementing Typescript, but opted for a more simple option in [HTMX](https://htmx.org/).
 
 <h3 align="left">Contributors</h3>
 <p align="left">
