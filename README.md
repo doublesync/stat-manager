@@ -2,7 +2,7 @@
 
 <h1 align="center">Welcome, this is 👋 stat-tracker</h1>
 <h3 align="center">An open-source statistic tracker for sports leagues.</h3>
-<p>If you manage a sports league (whether real-life or simulation) this is the project for you!</p>
+<p>This was a project for an online basketball simulation league. It was a slated to be a successor to our [original league.](https://github.com/doublesync/django-hoops)</p>
 
 - 💹 Statistic tracking and display.
 - 👶 Player and team creation.
@@ -10,8 +10,6 @@
 - 💵 Virtual currency & coupons.
 - 🏆 Award/accolade tracking.
 - 👨‍🔬 Other optional simulation league logic.
-
-This project is configured for my own basketball league, The Association.
 
 <h3 align="left">Contributors</h3>
 <p align="left">
