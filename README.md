@@ -1,6 +1,6 @@
 <h1 align="center">Welcome, this is 👋 stat-tracker</h1>
 <h3 align="center">An open-source statistic tracker for sports leagues.</h3>
-<p>This was a project for an online basketball simulation league.</p> 
+<p>This was a project for an online basketball simulation league. It once served as a community-place for over two hundred active members.</p> 
 
 - 💹 Statistic tracking and display.
 - 👶 Player and team creation.
